@@ -63,3 +63,82 @@ Game creators can design their own quests using a simple JSON-based format.
 ## 📦 Game Pack Format
 
 GoTrexia uses a portable game pack format:
+```
+.gamepack (zip archive)
+├── game.json
+├── start.jpg
+├── end.jpg
+├── stage1.jpg
+├── stage2.jpg
+```
+
+
+### Example `game.json` structure:
+
+```json
+{
+  "gameInfo": {
+    "title": "City Mystery Quest",
+    "author": "Game Creator",
+    "startBackground": "start.jpg"
+  },
+  "endScreen": {
+    "description": "Congratulations! You completed the adventure!",
+    "backgroundImage": "end.jpg"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "title": "The Old Bridge",
+      "description": "Find the old stone bridge near the river.",
+      "backgroundImage": "stage1.jpg",
+      "finalLocation": {
+        "latitude": 49.283,
+        "longitude": -123.120
+      },
+      "hintDelaySeconds": 60,
+      "hintRadiusMeters": 200,
+      "hintPrecisionDelaySeconds": 180,
+      "points": 100
+    }
+  ]
+}
+```
+
+## 🏗 Architecture
+
+GoTrexia is built with clean and modular architecture:
+
+/Models
+/GameEngine
+/Services
+/ViewModels
+/Views
+
+Core components:
+GameFileLoader
+GameStateManager
+LocationService
+HintService
+ScoreService
+
+## 🛠 Technology Stack
+
+.NET MAUI
+C#
+Android
+Google Maps integration
+JSON-based configuration
+
+## 🚀 Roadmap
+```
+[] MVP: Load game + map navigation
+[] Dynamic hint visualization
+[] Score engine refinement
+[] Game pack validator
+[] UI polish & animations
+[] Publish on Google Play
+```
+## 📌 Vision
+
+GoTrexia aims to become a flexible GPS quest engine that allows anyone to create real-world adventure games without writing code.
