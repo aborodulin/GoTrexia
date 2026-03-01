@@ -1,0 +1,22 @@
+<Solution>
+  <Project Path="src/GoTrexia.Droid/GoTrexia.Droid.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="src/GoTrexia.iOS/GoTrexia.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="src/GoTrexia.Mac/GoTrexia.Mac.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="src/GoTrexia.WinUI/GoTrexia.WinUI.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Folder Name="/src/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/GoTrexia.Tests/GoTrexia.Tests.csproj" />
+  </Folder>
+  <Project Path="src/GoTrexia.App/GoTrexia.App.csproj" />
+  <Project Path="src/GoTrexia.Core/GoTrexia.Core.csproj" />
+  <Project Path="src/GoTrexia.Application/GoTrexia.Application.csproj" />
+  <Project Path="src/GoTrexia.Infrastructure/GoTrexia.Infrastructure.csproj" />
+</Solution>

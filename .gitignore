@@ -1,0 +1,95 @@
+############################################
+# .NET / MAUI / Visual Studio
+############################################
+
+## Build results
+bin/
+obj/
+
+## User-specific files
+*.user
+*.userosscache
+*.suo
+*.rsuser
+
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+
+## Visual Studio cache
+.vs/
+
+## Resharper
+_ReSharper*/
+*.DotSettings.user
+
+############################################
+# Logs
+############################################
+*.log
+
+############################################
+# OS files
+############################################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+############################################
+# NuGet
+############################################
+packages/
+*.nupkg
+*.snupkg
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+############################################
+# MAUI / Xamarin / Android
+############################################
+
+## Android
+*.apk
+*.aab
+*.ap_ 
+*.dex
+*.class
+*.keystore
+*.jks
+*.androidproj.user
+
+## Signing keys (important!)
+*.keystore
+*.jks
+
+## Android Studio leftovers
+.gradle/
+local.properties
+
+############################################
+# iOS / MacCatalyst
+############################################
+*.ipa
+*.dSYM/
+*.app
+
+############################################
+# Test Results
+############################################
+TestResults/
+coverage/
+
+############################################
+# Publish output
+############################################
+publish/
+
+############################################
+# Temporary files
+############################################
+*.tmp
+*.temp
