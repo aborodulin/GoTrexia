@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="samplegame.json" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/GoTrexia.App/GoTrexia.App.csproj" />
     <Project Path="src/GoTrexia.Application/GoTrexia.Application.csproj" />

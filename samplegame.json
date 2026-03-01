@@ -1,0 +1,32 @@
+{
+  "settings": {
+    "minConfirmationRadiusMeters": 10,
+    "maxSearchRadiusMeters": 120,
+    "hintRadiusMeters": 50,
+    "hintButtonTimeoutSeconds": 30
+  },
+  "startScreen": {
+    "title": "Treasure Hunt in the Park",
+    "description": "Find all hidden treasures!",
+    "backgroundImage": "start.jpg",
+    "author": "Andrey"
+  },
+  "endScreen": {
+    "title": "Congratulations!",
+    "description": "You completed the game!",
+    "backgroundImage": "end.jpg",
+    "author": ""
+  },
+  "stages": [
+    {
+      "name": "Old Oak Tree",
+      "description": "Find the big oak tree near the lake.",
+      "backgroundImage": "stage1.jpg",
+      "targetLocation": {
+        "latitude": 49.123,
+        "longitude": -122.456
+      },
+      "score": 100
+    }
+  ]
+}
