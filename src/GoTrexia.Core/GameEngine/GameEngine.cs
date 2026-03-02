@@ -28,6 +28,8 @@ public sealed class GameEngine
 
     public StageState CurrentStageState => _currentStageState;
 
+    public ScreenDefinition EndScreen => _definition.EndScreen;
+
     public int TotalScore => _totalScore;
 
     public bool IsFinished

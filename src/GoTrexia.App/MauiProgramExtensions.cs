@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using GoTrexia.Application;
+using GoTrexia.Core.Engine;
+using Microsoft.Extensions.Logging;
 
 namespace GoTrexia
 {
@@ -8,11 +10,16 @@ namespace GoTrexia
         {
             builder
                 .UseMauiApp<App>()
+                .UseMauiMaps()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton<GameSession>();
+            builder.Services.AddSingleton<DistanceCalculator>();
+            builder.Services.AddSingleton<StageCompletionEngine>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

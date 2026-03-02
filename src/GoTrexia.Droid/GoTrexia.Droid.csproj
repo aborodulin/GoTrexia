@@ -19,6 +19,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Resources\raw\sample-game.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Include="Resources\raw\sample-game.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </MauiAsset>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 	</ItemGroup>
