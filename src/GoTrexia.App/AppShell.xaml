@@ -8,8 +8,8 @@
     Title="GoTrexia">
 
     <ShellContent
-        Title="Start"
-        Route="StartPage"
-        ContentTemplate="{DataTemplate local:StartPage}" />
+        Title="Load Game"
+        Route="LoadGamePage"
+        ContentTemplate="{DataTemplate local:LoadGamePage}" />
 
 </Shell>

@@ -23,12 +23,24 @@ public partial class EndPage : ContentPage
 
         var engine = _gameSession.Engine!;
         TitleLabel.Text = engine.EndScreen.Title;
+        DescriptionLabel.Text = engine.EndScreen.Description;
+        AuthorLabel.Text = engine.EndScreen.Author;
         ScoreLabel.Text = $"Score: {engine.TotalScore}";
-        BackgroundImage.Source = engine.EndScreen.BackgroundImage;
+        BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, engine.EndScreen.BackgroundImage);
     }
 
     private async void OnBackToStartClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//StartPage");
+        await Shell.Current.GoToAsync(nameof(StartPage));
+    }
+
+    private static string BuildImagePath(string? rootFolder, string fileName)
+    {
+        if (string.IsNullOrWhiteSpace(rootFolder))
+        {
+            return fileName;
+        }
+
+        return Path.Combine(rootFolder, fileName);
     }
 }

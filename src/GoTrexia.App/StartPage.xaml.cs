@@ -1,38 +1,51 @@
 using GoTrexia.Application;
-using GoTrexia.Core.Engine;
-using GoTrexia.Infrastructure.Game;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GoTrexia;
 
 public partial class StartPage : ContentPage
 {
     private GameSession? _gameSession;
-    private StageCompletionEngine? _stageEngine;
 
     public StartPage()
     {
         InitializeComponent();
     }
 
-    private async void OnLoadGameClicked(object? sender, EventArgs e)
+    protected override void OnAppearing()
     {
+        base.OnAppearing();
+
         EnsureServices();
 
-        await using var stream =
-        await FileSystem.OpenAppPackageFileAsync("sample-game.json");
+        var engine = _gameSession!.Engine;
+        if (engine is null)
+        {
+            return;
+        }
 
-        var loader = new GameDefinitionLoader();
+        TitleLabel.Text = engine.StartScreen.Title;
+        DescriptionLabel.Text = engine.StartScreen.Description;
+        AuthorLabel.Text = engine.StartScreen.Author;
+        BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, engine.StartScreen.BackgroundImage);
+        StagesCollectionView.ItemsSource = engine.StageCheckpoints;
+    }
 
-        var definition = await loader.LoadAsync(stream);
+    private async void OnStartClicked(object? sender, EventArgs e)
+    {
+        var engine = _gameSession?.Engine;
 
-        _gameSession.Start(definition, _stageEngine);
+        if (engine is null || engine.IsFinished)
+        {
+            return;
+        }
 
         await Shell.Current.GoToAsync(nameof(StagePage));
     }
 
     private void EnsureServices()
     {
-        if (_gameSession is not null && _stageEngine is not null)
+        if (_gameSession is not null)
         {
             return;
         }
@@ -41,6 +54,15 @@ public partial class StartPage : ContentPage
             ?? throw new InvalidOperationException("Service provider is not available.");
 
         _gameSession = services.GetRequiredService<GameSession>();
-        _stageEngine = services.GetRequiredService<StageCompletionEngine>();
+    }
+
+    private static string BuildImagePath(string? rootFolder, string fileName)
+    {
+        if (string.IsNullOrWhiteSpace(rootFolder))
+        {
+            return fileName;
+        }
+
+        return Path.Combine(rootFolder, fileName);
     }
 }

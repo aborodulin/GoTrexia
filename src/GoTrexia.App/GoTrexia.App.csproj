@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
@@ -39,6 +39,15 @@
 		<ProjectReference Include="..\GoTrexia.Core\GoTrexia.Core.csproj" />
 		<ProjectReference Include="..\GoTrexia.Application\GoTrexia.Application.csproj" />
 		<ProjectReference Include="..\GoTrexia.Infrastructure\GoTrexia.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Update="Resources\Raw\sample-game.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\SampleGame.zip">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </MauiAsset>
 	</ItemGroup>
 
 </Project>

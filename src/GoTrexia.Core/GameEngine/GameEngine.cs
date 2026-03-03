@@ -7,6 +7,7 @@ public sealed class GameEngine
 {
     private readonly GameDefinition _definition;
     private readonly StageCompletionEngine _stageCompletionEngine;
+    private readonly StageStatus[] _stageStatuses;
 
     private int _currentStageIndex = 0;
     private int _totalScore = 0;
@@ -21,6 +22,7 @@ public sealed class GameEngine
     {
         _definition = definition;
         _stageCompletionEngine = stageCompletionEngine;
+        _stageStatuses = Enumerable.Repeat(StageStatus.NotStarted, _definition.Stages.Count).ToArray();
     }
 
     public StageDefinition CurrentStage
@@ -28,7 +30,29 @@ public sealed class GameEngine
 
     public StageState CurrentStageState => _currentStageState;
 
+    public ScreenDefinition StartScreen => _definition.StartScreen;
+
     public ScreenDefinition EndScreen => _definition.EndScreen;
+
+    public GameSettings Settings => _definition.Settings;
+
+    public IReadOnlyList<StageDefinition> Stages => _definition.Stages;
+
+    public IReadOnlyList<StageCheckpoint> StageCheckpoints =>
+        _definition.Stages
+            .Select((stage, index) =>
+            {
+                var status = _stageStatuses[index];
+                var isChecked = status is StageStatus.Completed or StageStatus.Skipped;
+
+                return new StageCheckpoint(
+                    stage.Name,
+                    stage.Description,
+                    stage.Score,
+                    isChecked,
+                    status == StageStatus.Skipped);
+            })
+            .ToList();
 
     public int TotalScore => _totalScore;
 
@@ -65,12 +89,14 @@ public sealed class GameEngine
             score /= 2;
 
         _totalScore += score;
+        _stageStatuses[_currentStageIndex] = StageStatus.Completed;
 
         MoveToNextStage();
     }
 
     public void Skip()
     {
+        _stageStatuses[_currentStageIndex] = StageStatus.Skipped;
         MoveToNextStage();
     }
 

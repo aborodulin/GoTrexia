@@ -1,0 +1,43 @@
+{
+  "settings": {
+    "minConfirmationRadiusMeters": 10,
+    "maxSearchRadiusMeters": 120,
+    "hintRadiusMeters": 50,
+    "hintButtonTimeoutSeconds": 30
+  },
+  "startScreen": {
+    "title": "Easter Forest Hunt",
+    "description": "Find hidden eggs in the pine forest near the creek.",
+    "backgroundImage": "start.png",
+    "author": "Andrey"
+  },
+  "endScreen": {
+    "title": "Congratulations!",
+    "description": "You collected all Easter treasures!",
+    "backgroundImage": "end.png",
+    "author": ""
+  },
+  "stages": [
+    {
+      "name": "Old Oak Tree",
+      "description": "Search near the big oak tree by the stream.",
+      "backgroundImage": "stage1.png",
+      "targetLocation": {
+        "latitude": 49.2827,
+        "longitude": -123.1207
+      },
+      "score": 100
+    },
+    {
+      "name": "Rainbow Creek",
+      "description": "Watch out deep water!",
+      "backgroundImage": "stage1.png",
+      "targetLocation": {
+        "latitude": 49.2827,
+        "longitude": -123.1207
+      },
+      "score": 200
+    }
+
+  ]
+}

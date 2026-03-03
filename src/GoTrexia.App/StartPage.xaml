@@ -2,13 +2,58 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GoTrexia.StartPage">
-    <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center">
-        <Label Text="GoTrexia"
-               FontSize="32"
-               HorizontalOptions="Center" />
+    <Grid>
+        <Image x:Name="BackgroundImage"
+               Aspect="AspectFill" />
 
-        <Button Text="Load Sample Game"
-                Clicked="OnLoadGameClicked"
-                HorizontalOptions="Fill" />
-    </VerticalStackLayout>
+        <VerticalStackLayout Padding="24" Spacing="12" VerticalOptions="Center">
+            <Label x:Name="TitleLabel"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   TextColor="White" />
+
+            <Label x:Name="DescriptionLabel"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   TextColor="White" />
+
+            <Label x:Name="AuthorLabel"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="White" />
+
+            <CollectionView x:Name="StagesCollectionView"
+                            HeightRequest="220">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeThickness="0"
+                                BackgroundColor="#66000000"
+                                Padding="10"
+                                Margin="0,4">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                <CheckBox IsChecked="{Binding IsChecked}"
+                                          IsEnabled="False"
+                                          VerticalOptions="Start" />
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                    <Label Text="{Binding Name}"
+                                           FontSize="18"
+                                           TextColor="White" />
+                                    <Label Text="{Binding Description}"
+                                           FontSize="14"
+                                           TextColor="White" />
+                                    <Label Text="{Binding Score, StringFormat='Score: {0}'}"
+                                           FontSize="12"
+                                           TextColor="White" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Start"
+                    Clicked="OnStartClicked" />
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

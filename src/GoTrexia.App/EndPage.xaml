@@ -12,6 +12,16 @@
                    HorizontalOptions="Center"
                    TextColor="White" />
 
+            <Label x:Name="DescriptionLabel"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   TextColor="White" />
+
+            <Label x:Name="AuthorLabel"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="White" />
+
             <Label x:Name="ScoreLabel"
                    FontSize="24"
                    HorizontalOptions="Center"

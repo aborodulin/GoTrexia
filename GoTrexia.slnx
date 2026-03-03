@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path="samplegame.json" />
+    <File Path="SampleGame/game.json" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/GoTrexia.App/GoTrexia.App.csproj" />

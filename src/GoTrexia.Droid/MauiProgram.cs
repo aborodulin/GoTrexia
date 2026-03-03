@@ -7,7 +7,9 @@
             var builder = MauiApp.CreateBuilder();
 
             builder
+                //.UseMauiMaps()
                 .UseSharedMauiApp();
+                
 
             return builder.Build();
         }

@@ -1,4 +1,5 @@
 using GoTrexia.Core;
+using GoTrexia.Core.ValueObjects;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -13,15 +14,38 @@ public sealed class GameDefinitionLoader
             PropertyNameCaseInsensitive = true
         };
 
-        var definition =
-            await JsonSerializer.DeserializeAsync<GameDefinition>(
+        var payload =
+            await JsonSerializer.DeserializeAsync<GameDefinitionPayload>(
                 stream,
                 options);
 
-        if (definition is null)
+        if (payload is null)
             throw new InvalidOperationException("Invalid game definition file.");
 
-        return definition;
+        return new GameDefinition(
+            new GameSettings(
+                payload.Settings.MinConfirmationRadiusMeters,
+                payload.Settings.MaxSearchRadiusMeters,
+                payload.Settings.HintRadiusMeters,
+                payload.Settings.HintButtonTimeoutSeconds),
+            new ScreenDefinition(
+                payload.StartScreen.Title,
+                payload.StartScreen.Description,
+                payload.StartScreen.BackgroundImage,
+                payload.StartScreen.Author),
+            new ScreenDefinition(
+                payload.EndScreen.Title,
+                payload.EndScreen.Description,
+                payload.EndScreen.BackgroundImage,
+                payload.EndScreen.Author),
+            payload.Stages
+                .Select(stage => new StageDefinition(
+                    stage.Name,
+                    stage.Description,
+                    stage.BackgroundImage,
+                    new GeoPoint(stage.TargetLocation.Latitude, stage.TargetLocation.Longitude),
+                    stage.Score))
+                .ToList());
     }
       
 
