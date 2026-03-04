@@ -37,6 +37,26 @@
         "longitude": -123.1207
       },
       "score": 200
+    },
+    {
+      "name": "School yard",
+      "description": "Are you good with basketball?!",
+      "backgroundImage": "stage1.png",
+      "targetLocation": {
+        "latitude": 49.2827,
+        "longitude": -123.1207
+      },
+      "score": 80
+    },
+    {
+      "name": "High hope",
+      "description": "Lets go up. Go to the top of Coquitlam Crunch trail.",
+      "backgroundImage": "stage1.png",
+      "targetLocation": {
+        "latitude": 49.2827,
+        "longitude": -123.1207
+      },
+      "score": 140
     }
 
   ]

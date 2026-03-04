@@ -7,27 +7,40 @@
         <Image x:Name="BackgroundImage"
                Aspect="AspectFill" />
 
-        <VerticalStackLayout Padding="16" Spacing="10">
+        <Grid Padding="16"
+              RowDefinitions="Auto,Auto,Auto,*,Auto"
+              RowSpacing="10">
             <Label x:Name="StageTitleLabel"
+                   Grid.Row="0"
                    FontSize="24"
                    TextColor="White"
                    HorizontalOptions="Center" />
 
             <Label x:Name="StageDescriptionLabel"
+                   Grid.Row="1"
                    FontSize="16"
                    TextColor="White"
                    HorizontalOptions="Center" />
 
             <Label x:Name="StageScoreLabel"
+                   Grid.Row="2"
                    FontSize="16"
                    TextColor="White"
                    HorizontalOptions="Center" />
 
             <maps:Map x:Name="StageMap"
-                      HeightRequest="320" />
+                      Grid.Row="3" />
 
-            <Button Text="Skip Stage"
-                    Clicked="OnSkipClicked" />
-        </VerticalStackLayout>
+            <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Text="Complete"
+                        Grid.Column="0"
+                        IsEnabled="False"
+                        Opacity="0.6" />
+
+                <Button Text="Skip Stage"
+                        Grid.Column="1"
+                        Clicked="OnSkipClicked" />
+            </Grid>
+        </Grid>
     </Grid>
 </ContentPage>

@@ -65,6 +65,7 @@ artifacts/
 ## Signing keys (important!)
 *.keystore
 *.jks
+google_maps_api.xml
 
 ## Android Studio leftovers
 .gradle/

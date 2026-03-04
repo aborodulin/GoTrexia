@@ -16,24 +16,25 @@
 		       <MauiXaml Update="MyPage.xaml" Inflator="Default" /> (reverts to defaults: Runtime for Debug, XamlC for Release)
 		       <MauiXaml Update="MyPage.xaml" Inflator="Runtime" /> (force runtime inflation) -->
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
+		<AndroidSigningKeyStore>gotrexia-release.keystore</AndroidSigningKeyStore>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <AndroidSigningStorePass>gotrexiakkk</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>myapp</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>gotrexiakkk</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <AndroidSigningStorePass>gotrexiakkk</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>myapp</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>gotrexiakkk</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <AndroidResource Remove="Resources\raw\sample-game.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiAsset Include="Resources\raw\sample-game.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </MauiAsset>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +44,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\GoTrexia.App\GoTrexia.App.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\raw\" />
 	</ItemGroup>
 
 </Project>

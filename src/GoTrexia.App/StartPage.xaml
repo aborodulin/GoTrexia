@@ -6,24 +6,28 @@
         <Image x:Name="BackgroundImage"
                Aspect="AspectFill" />
 
-        <VerticalStackLayout Padding="24" Spacing="12" VerticalOptions="Center">
-            <Label x:Name="TitleLabel"
-                   FontSize="30"
-                   HorizontalOptions="Center"
-                   TextColor="White" />
+        <Grid Padding="24"
+              RowDefinitions="Auto,*,Auto"
+              RowSpacing="12">
+            <VerticalStackLayout Grid.Row="0" Spacing="8">
+                <Label x:Name="TitleLabel"
+                       FontSize="30"
+                       HorizontalOptions="Center"
+                       TextColor="White" />
 
-            <Label x:Name="DescriptionLabel"
-                   FontSize="18"
-                   HorizontalOptions="Center"
-                   TextColor="White" />
+                <Label x:Name="DescriptionLabel"
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       TextColor="White" />
 
-            <Label x:Name="AuthorLabel"
-                   FontSize="16"
-                   HorizontalOptions="Center"
-                   TextColor="White" />
+                <Label x:Name="AuthorLabel"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="White" />
+            </VerticalStackLayout>
 
             <CollectionView x:Name="StagesCollectionView"
-                            HeightRequest="220">
+                            Grid.Row="1">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border StrokeThickness="0"
@@ -52,8 +56,10 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Start"
-                    Clicked="OnStartClicked" />
-        </VerticalStackLayout>
+            <Button Grid.Row="2"
+                    Text="Start"
+                    Clicked="OnStartClicked"
+                    VerticalOptions="End" />
+        </Grid>
     </Grid>
 </ContentPage>

@@ -56,9 +56,9 @@ public partial class StagePage : ContentPage
         {
             Center = center,
             Radius = Microsoft.Maui.Maps.Distance.FromMeters(maxSearchRadius),
-            StrokeColor = Colors.Blue,
+            StrokeColor = Color.FromRgb(204, 153, 0),
             StrokeWidth = 4,
-            FillColor = new Color(0x220000FF)
+            FillColor = Color.FromRgba(255, 255, 153, 128)
         });
 
         StageMap.MoveToRegion(Microsoft.Maui.Maps.MapSpan.FromCenterAndRadius(
