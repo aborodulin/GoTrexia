@@ -1,5 +1,4 @@
 using GoTrexia.Application;
-using Microsoft.Maui.Controls.Maps;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GoTrexia;
@@ -23,20 +22,52 @@ public partial class StagePage : ContentPage
         base.OnAppearing();
 
         LoadCurrentStage();
-        _ = EnableLocationAsync();
+        _gameSession.StartCurrentStageTimer();
+    }
+
+    private async void OnMapClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(MapPage));
     }
 
     private async void OnSkipClicked(object? sender, EventArgs e)
     {
-        _gameSession.Engine!.Skip();
+        var engine = _gameSession.Engine!;
+        if (engine.IsCurrentStageCompleted)
+        {
+            return;
+        }
 
-        if (_gameSession.Engine.IsFinished)
+        engine.Skip();
+
+        if (engine.IsFinished)
         {
             await Shell.Current.GoToAsync(nameof(EndPage));
             return;
         }
 
         LoadCurrentStage();
+        _gameSession.StartCurrentStageTimer();
+    }
+
+    private async void OnCompleteClicked(object? sender, EventArgs e)
+    {
+        var engine = _gameSession.Engine!;
+        if (engine.IsCurrentStageCompleted)
+        {
+            return;
+        }
+
+        engine.CompleteCurrentStage();
+
+        if (engine.IsFinished)
+        {
+            await Shell.Current.GoToAsync(nameof(EndPage));
+            return;
+        }
+
+        LoadCurrentStage();
+        _gameSession.StartCurrentStageTimer();
     }
 
     private void LoadCurrentStage()
@@ -44,56 +75,24 @@ public partial class StagePage : ContentPage
         var engine = _gameSession.Engine!;
         var stage = engine.CurrentStage;
         StageTitleLabel.Text = stage.Name;
-        StageDescriptionLabel.Text = stage.Description;
+        StageLongDescriptionLabel.Text = stage.Description;
         StageScoreLabel.Text = $"Score: {stage.Score}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
 
-        var center = new Location(stage.TargetLocation.Latitude, stage.TargetLocation.Longitude);
-        var maxSearchRadius = engine.Settings.MaxSearchRadiusMeters;
+        var isCompleted = engine.IsCurrentStageCompleted;
+        SkipButton.IsEnabled = !isCompleted;
+        CompleteButton.IsEnabled = !isCompleted;
 
-        StageMap.MapElements.Clear();
-        StageMap.MapElements.Add(new Circle
+        if (isCompleted)
         {
-            Center = center,
-            Radius = Microsoft.Maui.Maps.Distance.FromMeters(maxSearchRadius),
-            StrokeColor = Color.FromRgb(204, 153, 0),
-            StrokeWidth = 4,
-            FillColor = Color.FromRgba(255, 255, 153, 128)
-        });
-
-        StageMap.MoveToRegion(Microsoft.Maui.Maps.MapSpan.FromCenterAndRadius(
-            center,
-            Microsoft.Maui.Maps.Distance.FromMeters(maxSearchRadius * 2)));
-    }
-
-    private async Task EnableLocationAsync()
-    {
-        var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-
-        if (status != PermissionStatus.Granted)
-        {
-            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            SkipButton.Opacity = 0.6;
+            CompleteButton.Opacity = 0.6;
         }
-
-        if (status == PermissionStatus.Granted)
+        else
         {
-            StageMap.IsShowingUser = true;
-
-            var lastKnownLocation = await Geolocation.GetLastKnownLocationAsync();
-            if (lastKnownLocation is not null)
-            {
-                MoveCamera(lastKnownLocation);
-            }
+            SkipButton.Opacity = 1;
+            CompleteButton.Opacity = 1;
         }
-    }
-
-    private void MoveCamera(Location location)
-    {
-        var cameraRegion = Microsoft.Maui.Maps.MapSpan.FromCenterAndRadius(
-            new Location(location.Latitude, location.Longitude),
-            Microsoft.Maui.Maps.Distance.FromMeters(200));
-
-        StageMap.MoveToRegion(cameraRegion);
     }
 
     private static string BuildImagePath(string? rootFolder, string fileName)

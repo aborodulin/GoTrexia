@@ -8,6 +8,7 @@
 
             Routing.RegisterRoute(nameof(StartPage), typeof(StartPage));
             Routing.RegisterRoute(nameof(StagePage), typeof(StagePage));
+            Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
             Routing.RegisterRoute(nameof(EndPage), typeof(EndPage));
         }
     }

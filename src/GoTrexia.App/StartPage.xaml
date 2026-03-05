@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
+             SafeAreaEdges="None"
              x:Class="GoTrexia.StartPage">
     <Grid>
         <Image x:Name="BackgroundImage"
-               Aspect="AspectFill" />
+               Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill" />
 
         <Grid Padding="24"
               RowDefinitions="Auto,*,Auto"
@@ -43,9 +47,6 @@
                                     <Label Text="{Binding Name}"
                                            FontSize="18"
                                            TextColor="White" />
-                                    <Label Text="{Binding Description}"
-                                           FontSize="14"
-                                           TextColor="White" />
                                     <Label Text="{Binding Score, StringFormat='Score: {0}'}"
                                            FontSize="12"
                                            TextColor="White" />
@@ -56,7 +57,8 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Grid.Row="2"
+            <Button x:Name="StartButton"
+                    Grid.Row="2"
                     Text="Start"
                     Clicked="OnStartClicked"
                     VerticalOptions="End" />

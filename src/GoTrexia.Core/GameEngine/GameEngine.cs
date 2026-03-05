@@ -28,6 +28,8 @@ public sealed class GameEngine
     public StageDefinition CurrentStage
         => _definition.Stages[_currentStageIndex];
 
+    public int CurrentStageIndex => _currentStageIndex;
+
     public StageState CurrentStageState => _currentStageState;
 
     public ScreenDefinition StartScreen => _definition.StartScreen;
@@ -43,14 +45,14 @@ public sealed class GameEngine
             .Select((stage, index) =>
             {
                 var status = _stageStatuses[index];
-                var isChecked = status is StageStatus.Completed or StageStatus.Skipped;
+                var isChecked = status is StageStatus.Completed;
 
                 return new StageCheckpoint(
                     stage.Name,
                     stage.Description,
                     stage.Score,
                     isChecked,
-                    status == StageStatus.Skipped);
+                    false);
             })
             .ToList();
 
@@ -58,6 +60,9 @@ public sealed class GameEngine
 
     public bool IsFinished
         => _currentStageIndex >= _definition.Stages.Count;
+
+    public bool IsCurrentStageCompleted =>
+        !IsFinished && _stageStatuses[_currentStageIndex] == StageStatus.Completed;
 
     public StageState UpdatePlayerPosition(GeoPoint playerLocation)
     {
@@ -83,6 +88,14 @@ public sealed class GameEngine
         if (_currentStageState.Status != StageStatus.AwaitingConfirmation)
             return;
 
+        CompleteCurrentStage();
+    }
+
+    public void CompleteCurrentStage()
+    {
+        if (IsFinished || IsCurrentStageCompleted)
+            return;
+
         var score = CurrentStage.Score;
 
         if (_hintUsed)
@@ -96,7 +109,10 @@ public sealed class GameEngine
 
     public void Skip()
     {
-        _stageStatuses[_currentStageIndex] = StageStatus.Skipped;
+        if (IsFinished || IsCurrentStageCompleted)
+            return;
+
+        _stageStatuses[_currentStageIndex] = StageStatus.Completed;
         MoveToNextStage();
     }
 

@@ -1,45 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             Shell.NavBarIsVisible="False"
+             SafeAreaEdges="None"
              x:Class="GoTrexia.StagePage">
     <Grid>
         <Image x:Name="BackgroundImage"
-               Aspect="AspectFill" />
+               Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill" />
 
         <Grid Padding="16"
-              RowDefinitions="Auto,Auto,Auto,*,Auto"
+              RowDefinitions="Auto,Auto,*,Auto"
               RowSpacing="10">
             <Label x:Name="StageTitleLabel"
                    Grid.Row="0"
-                   FontSize="24"
+                   FontSize="29"
                    TextColor="White"
-                   HorizontalOptions="Center" />
-
-            <Label x:Name="StageDescriptionLabel"
-                   Grid.Row="1"
-                   FontSize="16"
-                   TextColor="White"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="0,0" Radius="8" Opacity="1" />
+                </Label.Shadow>
+            </Label>
 
             <Label x:Name="StageScoreLabel"
-                   Grid.Row="2"
-                   FontSize="16"
+                   Grid.Row="1"
+                   FontSize="19"
                    TextColor="White"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="0,0" Radius="8" Opacity="1" />
+                </Label.Shadow>
+            </Label>
 
-            <maps:Map x:Name="StageMap"
-                      Grid.Row="3" />
+            <Border Grid.Row="2"
+                    BackgroundColor="#66000000"
+                    StrokeThickness="0"
+                    Padding="8">
+                <ScrollView>
+                    <Label x:Name="StageLongDescriptionLabel"
+                           FontSize="22"
+                           TextColor="White"
+                           LineBreakMode="WordWrap" />
+                </ScrollView>
+            </Border>
 
-            <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="10">
-                <Button Text="Complete"
+            <Grid Grid.Row="3" ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Button x:Name="MapButton"
+                        Text="Map"
                         Grid.Column="0"
-                        IsEnabled="False"
-                        Opacity="0.6" />
+                        Clicked="OnMapClicked" />
 
-                <Button Text="Skip Stage"
+                <Button x:Name="SkipButton"
+                        Text="Skip"
                         Grid.Column="1"
                         Clicked="OnSkipClicked" />
+
+                <Button x:Name="CompleteButton"
+                        Text="Complete"
+                        Grid.Column="2"
+                        Clicked="OnCompleteClicked" />
             </Grid>
         </Grid>
     </Grid>

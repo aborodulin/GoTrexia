@@ -29,16 +29,30 @@ public partial class StartPage : ContentPage
         AuthorLabel.Text = engine.StartScreen.Author;
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, engine.StartScreen.BackgroundImage);
         StagesCollectionView.ItemsSource = engine.StageCheckpoints;
+
+        StartButton.Text = engine.IsFinished
+            ? "Completed"
+            : _gameSession.HasGameStarted
+                ? "Continue"
+                : "Start";
     }
 
     private async void OnStartClicked(object? sender, EventArgs e)
     {
         var engine = _gameSession?.Engine;
 
-        if (engine is null || engine.IsFinished)
+        if (engine is null)
         {
             return;
         }
+
+        if (engine.IsFinished)
+        {
+            await Shell.Current.GoToAsync(nameof(EndPage));
+            return;
+        }
+
+        _gameSession!.StartCurrentStageTimer();
 
         await Shell.Current.GoToAsync(nameof(StagePage));
     }
