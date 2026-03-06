@@ -39,6 +39,19 @@ public partial class MapPage : ContentPage
         }
     }
 
+    private void OnHintClicked(object? sender, EventArgs e)
+    {
+        var engine = _gameSession.Engine!;
+        if (engine.IsCurrentStageCompleted || engine.IsHintUsedForCurrentStage)
+        {
+            return;
+        }
+
+        engine.UseHint();
+        LoadCurrentStageMap();
+        UpdateCountdown();
+    }
+
     private void LoadCurrentStageMap()
     {
         var engine = _gameSession.Engine!;
@@ -47,14 +60,19 @@ public partial class MapPage : ContentPage
         StageTitleLabel.Text = stage.Name;
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
 
-        var center = new Location(stage.TargetLocation.Latitude, stage.TargetLocation.Longitude);
-        var maxSearchRadius = engine.Settings.MaxSearchRadiusMeters;
+        var isHintUsed = engine.IsHintUsedForCurrentStage;
+        var radiusMeters = isHintUsed
+            ? engine.Settings.HintRadiusMeters
+            : engine.Settings.MaxSearchRadiusMeters;
+
+        var locationSource = isHintUsed ? stage.HintLocation : stage.SearchLocation;
+        var center = new Location(locationSource.Latitude, locationSource.Longitude);
 
         StageMap.MapElements.Clear();
         StageMap.MapElements.Add(new Circle
         {
             Center = center,
-            Radius = Microsoft.Maui.Maps.Distance.FromMeters(maxSearchRadius),
+            Radius = Microsoft.Maui.Maps.Distance.FromMeters(radiusMeters),
             StrokeColor = Color.FromRgb(204, 153, 0),
             StrokeWidth = 4,
             FillColor = Color.FromRgba(255, 255, 153, 128)
@@ -62,7 +80,7 @@ public partial class MapPage : ContentPage
 
         StageMap.MoveToRegion(Microsoft.Maui.Maps.MapSpan.FromCenterAndRadius(
             center,
-            Microsoft.Maui.Maps.Distance.FromMeters(maxSearchRadius * 2)));
+            Microsoft.Maui.Maps.Distance.FromMeters(radiusMeters * 2)));
     }
 
     private void StartCountdown()
@@ -91,6 +109,8 @@ public partial class MapPage : ContentPage
 
         CountdownLabel.IsVisible = false;
         HintButton.IsVisible = true;
+        HintButton.IsEnabled = !_gameSession.Engine!.IsHintUsedForCurrentStage;
+        HintButton.Text = _gameSession.Engine.IsHintUsedForCurrentStage ? "Hint used" : "Hint";
     }
 
     private async Task EnableLocationAsync()
@@ -109,18 +129,11 @@ public partial class MapPage : ContentPage
             var lastKnownLocation = await Geolocation.GetLastKnownLocationAsync();
             if (lastKnownLocation is not null)
             {
-                MoveCamera(lastKnownLocation);
+                _gameSession.Engine!.UpdatePlayerPosition(new GoTrexia.Core.ValueObjects.GeoPoint(
+                    lastKnownLocation.Latitude,
+                    lastKnownLocation.Longitude));
             }
         }
-    }
-
-    private void MoveCamera(Location location)
-    {
-        var cameraRegion = Microsoft.Maui.Maps.MapSpan.FromCenterAndRadius(
-            new Location(location.Latitude, location.Longitude),
-            Microsoft.Maui.Maps.Distance.FromMeters(200));
-
-        StageMap.MoveToRegion(cameraRegion);
     }
 
     private static string BuildImagePath(string? rootFolder, string fileName)

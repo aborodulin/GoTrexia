@@ -43,6 +43,8 @@ public sealed class GameDefinitionLoader
                     stage.Name,
                     stage.Description,
                     stage.BackgroundImage,
+                    new GeoPoint(stage.SearchLocation.Latitude, stage.SearchLocation.Longitude),
+                    new GeoPoint(stage.HintLocation.Latitude, stage.HintLocation.Longitude),
                     new GeoPoint(stage.TargetLocation.Latitude, stage.TargetLocation.Longitude),
                     stage.Score))
                 .ToList());
@@ -71,6 +73,8 @@ public sealed class GameDefinitionLoader
         string Name,
         string Description,
         [property: JsonPropertyName("backgroundImage")] string BackgroundImage,
+        TargetLocationPayload SearchLocation,
+        TargetLocationPayload HintLocation,
         TargetLocationPayload TargetLocation,
         int Score);
 

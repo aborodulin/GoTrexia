@@ -64,6 +64,11 @@ public sealed class GameEngine
     public bool IsCurrentStageCompleted =>
         !IsFinished && _stageStatuses[_currentStageIndex] == StageStatus.Completed;
 
+    public bool CanCompleteCurrentStage =>
+        !IsFinished && _currentStageState.CanConfirm;
+
+    public bool IsHintUsedForCurrentStage => _hintUsed;
+
     public StageState UpdatePlayerPosition(GeoPoint playerLocation)
     {
         var settings = new StageSettings(
@@ -93,7 +98,7 @@ public sealed class GameEngine
 
     public void CompleteCurrentStage()
     {
-        if (IsFinished || IsCurrentStageCompleted)
+        if (IsFinished || IsCurrentStageCompleted || !CanCompleteCurrentStage)
             return;
 
         var score = CurrentStage.Score;

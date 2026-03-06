@@ -29,6 +29,7 @@
                         Text="Hint"
                         IsVisible="False"
                         HeightRequest="48"
+                        Clicked="OnHintClicked"
                         HorizontalOptions="Center"
                         VerticalOptions="Center" />
             </Grid>

@@ -6,6 +6,7 @@ namespace GoTrexia;
 public partial class StagePage : ContentPage
 {
     private readonly GameSession _gameSession;
+    private IDispatcherTimer? _locationTimer;
 
     public StagePage()
     {
@@ -23,6 +24,18 @@ public partial class StagePage : ContentPage
 
         LoadCurrentStage();
         _gameSession.StartCurrentStageTimer();
+        StartLocationTracking();
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        if (_locationTimer is not null)
+        {
+            _locationTimer.Stop();
+            _locationTimer = null;
+        }
     }
 
     private async void OnMapClicked(object? sender, EventArgs e)
@@ -53,7 +66,7 @@ public partial class StagePage : ContentPage
     private async void OnCompleteClicked(object? sender, EventArgs e)
     {
         var engine = _gameSession.Engine!;
-        if (engine.IsCurrentStageCompleted)
+        if (engine.IsCurrentStageCompleted || !engine.CanCompleteCurrentStage)
         {
             return;
         }
@@ -79,20 +92,61 @@ public partial class StagePage : ContentPage
         StageScoreLabel.Text = $"Score: {stage.Score}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
 
-        var isCompleted = engine.IsCurrentStageCompleted;
-        SkipButton.IsEnabled = !isCompleted;
-        CompleteButton.IsEnabled = !isCompleted;
+        UpdateActionButtons();
+    }
 
-        if (isCompleted)
+    private void UpdateActionButtons()
+    {
+        var engine = _gameSession.Engine!;
+        var isCompleted = engine.IsCurrentStageCompleted;
+
+        SkipButton.IsEnabled = !isCompleted;
+        CompleteButton.IsEnabled = !isCompleted && engine.CanCompleteCurrentStage;
+
+        SkipButton.Opacity = SkipButton.IsEnabled ? 1 : 0.6;
+        CompleteButton.Opacity = CompleteButton.IsEnabled ? 1 : 0.6;
+    }
+
+    private void StartLocationTracking()
+    {
+        _ = UpdateCompletionStateAsync();
+
+        _locationTimer ??= Dispatcher.CreateTimer();
+        _locationTimer.Interval = TimeSpan.FromSeconds(2);
+        _locationTimer.Tick += async (_, _) => await UpdateCompletionStateAsync();
+        _locationTimer.Start();
+    }
+
+    private async Task UpdateCompletionStateAsync()
+    {
+        var engine = _gameSession.Engine;
+        if (engine is null || engine.IsFinished || engine.IsCurrentStageCompleted)
         {
-            SkipButton.Opacity = 0.6;
-            CompleteButton.Opacity = 0.6;
+            UpdateActionButtons();
+            return;
         }
-        else
+
+        var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        if (status != PermissionStatus.Granted)
         {
-            SkipButton.Opacity = 1;
-            CompleteButton.Opacity = 1;
+            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
         }
+
+        if (status != PermissionStatus.Granted)
+        {
+            UpdateActionButtons();
+            return;
+        }
+
+        var lastKnownLocation = await Geolocation.GetLastKnownLocationAsync();
+        if (lastKnownLocation is not null)
+        {
+            engine.UpdatePlayerPosition(new GoTrexia.Core.ValueObjects.GeoPoint(
+                lastKnownLocation.Latitude,
+                lastKnownLocation.Longitude));
+        }
+
+        UpdateActionButtons();
     }
 
     private static string BuildImagePath(string? rootFolder, string fileName)
