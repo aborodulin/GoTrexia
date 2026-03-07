@@ -8,6 +8,8 @@ public partial class MapPage : ContentPage
 {
     private readonly GameSession _gameSession;
     private IDispatcherTimer? _timer;
+    private bool _hasLocationPermission;
+    private bool _permissionInitialized;
 
     public MapPage()
     {
@@ -39,6 +41,11 @@ public partial class MapPage : ContentPage
         }
     }
 
+    private async void OnBackClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///StartPage/StagePage");
+    }
+
     private void OnHintClicked(object? sender, EventArgs e)
     {
         var engine = _gameSession.Engine!;
@@ -59,6 +66,7 @@ public partial class MapPage : ContentPage
 
         StageTitleLabel.Text = stage.Name;
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
+        BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
 
         var isHintUsed = engine.IsHintUsedForCurrentStage;
         var radiusMeters = isHintUsed
@@ -89,12 +97,26 @@ public partial class MapPage : ContentPage
 
         _timer ??= Dispatcher.CreateTimer();
         _timer.Interval = TimeSpan.FromSeconds(1);
-        _timer.Tick += (_, _) => UpdateCountdown();
+        _timer.Tick += async (_, _) =>
+        {
+            await UpdateLocationStateAsync();
+            UpdateCountdown();
+        };
         _timer.Start();
     }
 
     private void UpdateCountdown()
     {
+        var engine = _gameSession.Engine!;
+
+        if (engine.CanCompleteCurrentStage)
+        {
+            CountdownLabel.IsVisible = false;
+            HintButton.IsVisible = false;
+            CompleteButton.IsVisible = true;
+            return;
+        }
+
         var remainingSeconds = _gameSession.GetRemainingHintSeconds();
 
         if (remainingSeconds > 0)
@@ -104,25 +126,38 @@ public partial class MapPage : ContentPage
             CountdownLabel.Text = $"{minutes:D2}:{seconds:D2}";
             CountdownLabel.IsVisible = true;
             HintButton.IsVisible = false;
+            CompleteButton.IsVisible = false;
             return;
         }
 
         CountdownLabel.IsVisible = false;
         HintButton.IsVisible = true;
+        CompleteButton.IsVisible = false;
         HintButton.IsEnabled = !_gameSession.Engine!.IsHintUsedForCurrentStage;
         HintButton.Text = _gameSession.Engine.IsHintUsedForCurrentStage ? "Hint used" : "Hint";
     }
 
     private async Task EnableLocationAsync()
     {
-        var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        await UpdateLocationStateAsync();
+    }
 
-        if (status != PermissionStatus.Granted)
+    private async Task UpdateLocationStateAsync()
+    {
+        if (!_permissionInitialized)
         {
-            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
+
+            _hasLocationPermission = status == PermissionStatus.Granted;
+            _permissionInitialized = true;
         }
 
-        if (status == PermissionStatus.Granted)
+        if (_hasLocationPermission)
         {
             StageMap.IsShowingUser = true;
 
@@ -134,6 +169,26 @@ public partial class MapPage : ContentPage
                     lastKnownLocation.Longitude));
             }
         }
+    }
+
+    private async void OnCompleteClicked(object? sender, EventArgs e)
+    {
+        var engine = _gameSession.Engine!;
+        if (engine.IsCurrentStageCompleted || !engine.CanCompleteCurrentStage)
+        {
+            return;
+        }
+
+        engine.CompleteCurrentStage();
+
+        if (engine.IsFinished)
+        {
+            await Shell.Current.GoToAsync("///StartPage/EndPage");
+            return;
+        }
+
+        _gameSession.StartCurrentStageTimer();
+        await Shell.Current.GoToAsync("///StartPage/StagePage");
     }
 
     private static string BuildImagePath(string? rootFolder, string fileName)

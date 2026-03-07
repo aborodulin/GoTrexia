@@ -17,7 +17,9 @@ namespace GoTrexia.Droid
             {
                 return;
             }
-
+            Window.SetFlags(
+                   WindowManagerFlags.LayoutNoLimits,
+                   WindowManagerFlags.LayoutNoLimits);
             WindowCompat.SetDecorFitsSystemWindows(Window, false);
 
             var controller = new WindowInsetsControllerCompat(Window, Window.DecorView);

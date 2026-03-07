@@ -27,6 +27,11 @@ public partial class StagePage : ContentPage
         StartLocationTracking();
     }
 
+    private async void OnBackClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///StartPage");
+    }
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
@@ -40,7 +45,7 @@ public partial class StagePage : ContentPage
 
     private async void OnMapClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(MapPage));
+        await Shell.Current.GoToAsync("///StartPage/StagePage/MapPage");
     }
 
     private async void OnSkipClicked(object? sender, EventArgs e)
@@ -55,7 +60,7 @@ public partial class StagePage : ContentPage
 
         if (engine.IsFinished)
         {
-            await Shell.Current.GoToAsync(nameof(EndPage));
+            await Shell.Current.GoToAsync("///StartPage/EndPage");
             return;
         }
 
@@ -75,7 +80,7 @@ public partial class StagePage : ContentPage
 
         if (engine.IsFinished)
         {
-            await Shell.Current.GoToAsync(nameof(EndPage));
+            await Shell.Current.GoToAsync("///StartPage/EndPage");
             return;
         }
 
@@ -91,6 +96,7 @@ public partial class StagePage : ContentPage
         StageLongDescriptionLabel.Text = stage.Description;
         StageScoreLabel.Text = $"Score: {stage.Score}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
+        BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
 
         UpdateActionButtons();
     }

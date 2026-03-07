@@ -13,15 +13,23 @@
         <Grid Padding="16"
               RowDefinitions="Auto,Auto,*,Auto"
               RowSpacing="10">
-            <Label x:Name="StageTitleLabel"
-                   Grid.Row="0"
-                   FontSize="29"
-                   TextColor="White"
-                   HorizontalOptions="Center">
-                <Label.Shadow>
-                    <Shadow Brush="Black" Offset="0,0" Radius="8" Opacity="1" />
-                </Label.Shadow>
-            </Label>
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                <ImageButton x:Name="BackButtonImage"
+                             BackgroundColor="Transparent"
+                             WidthRequest="32"
+                             HeightRequest="32"
+                             Clicked="OnBackClicked" />
+
+                <Label x:Name="StageTitleLabel"
+                       Grid.Column="1"
+                       FontSize="29"
+                       TextColor="White"
+                       HorizontalOptions="Center">
+                    <Label.Shadow>
+                        <Shadow Brush="Black" Offset="0,0" Radius="8" Opacity="1" />
+                    </Label.Shadow>
+                </Label>
+            </Grid>
 
             <Label x:Name="StageScoreLabel"
                    Grid.Row="1"

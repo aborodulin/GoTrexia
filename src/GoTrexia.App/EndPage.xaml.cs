@@ -27,11 +27,12 @@ public partial class EndPage : ContentPage
         AuthorLabel.Text = engine.EndScreen.Author;
         ScoreLabel.Text = $"Score: {engine.TotalScore}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, engine.EndScreen.BackgroundImage);
+        BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
     }
 
     private async void OnBackToStartClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(StartPage));
+        await Shell.Current.GoToAsync("///StartPage");
     }
 
     private static string BuildImagePath(string? rootFolder, string fileName)

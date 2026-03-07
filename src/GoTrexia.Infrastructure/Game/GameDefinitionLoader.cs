@@ -27,7 +27,8 @@ public sealed class GameDefinitionLoader
                 payload.Settings.MinConfirmationRadiusMeters,
                 payload.Settings.MaxSearchRadiusMeters,
                 payload.Settings.HintRadiusMeters,
-                payload.Settings.HintButtonTimeoutSeconds),
+                payload.Settings.HintButtonTimeoutSeconds,
+                payload.Settings.BackButton),
             new ScreenDefinition(
                 payload.StartScreen.Title,
                 payload.StartScreen.Description,
@@ -61,7 +62,8 @@ public sealed class GameDefinitionLoader
         double MinConfirmationRadiusMeters,
         double MaxSearchRadiusMeters,
         double HintRadiusMeters,
-        int HintButtonTimeoutSeconds);
+        int HintButtonTimeoutSeconds,
+        string BackButton);
 
     private sealed record ScreenPayload(
         string Title,

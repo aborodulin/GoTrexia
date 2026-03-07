@@ -10,6 +10,15 @@
                HorizontalOptions="Fill"
                VerticalOptions="Fill" />
 
+        <ImageButton x:Name="BackButtonImage"
+                     BackgroundColor="Transparent"
+                     WidthRequest="32"
+                     HeightRequest="32"
+                     Margin="16"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     Clicked="OnBackToStartClicked" />
+
         <VerticalStackLayout Padding="24" Spacing="12" VerticalOptions="Center">
             <Label x:Name="TitleLabel"
                    FontSize="30"

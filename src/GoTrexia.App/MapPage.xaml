@@ -12,11 +12,19 @@
                VerticalOptions="Fill" />
 
         <Grid Padding="16" RowDefinitions="Auto,Auto,*" RowSpacing="10">
-            <Label x:Name="StageTitleLabel"
-                   Grid.Row="0"
-                   FontSize="24"
-                   HorizontalOptions="Center"
-                   TextColor="White" />
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                <ImageButton x:Name="BackButtonImage"
+                             BackgroundColor="Transparent"
+                             WidthRequest="32"
+                             HeightRequest="32"
+                             Clicked="OnBackClicked" />
+
+                <Label x:Name="StageTitleLabel"
+                       Grid.Column="1"
+                       FontSize="24"
+                       HorizontalOptions="Center"
+                       TextColor="White" />
+            </Grid>
 
             <Grid Grid.Row="1" HeightRequest="48">
                 <Label x:Name="CountdownLabel"
@@ -30,6 +38,14 @@
                         IsVisible="False"
                         HeightRequest="48"
                         Clicked="OnHintClicked"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                <Button x:Name="CompleteButton"
+                        Text="Complete"
+                        IsVisible="False"
+                        HeightRequest="48"
+                        Clicked="OnCompleteClicked"
                         HorizontalOptions="Center"
                         VerticalOptions="Center" />
             </Grid>

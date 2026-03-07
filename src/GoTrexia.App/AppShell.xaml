@@ -5,11 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GoTrexia"
     Shell.FlyoutBehavior="Disabled"
+    NavBarIsVisible="False"
     Title="GoTrexia">
 
     <ShellContent
-        Title="Load Game"
-        Route="LoadGamePage"
-        ContentTemplate="{DataTemplate local:LoadGamePage}" />
+        Title="Start"
+        Route="StartPage"
+        ContentTemplate="{DataTemplate local:StartPage}" />
 
 </Shell>
