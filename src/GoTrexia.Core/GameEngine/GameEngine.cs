@@ -40,6 +40,8 @@ public sealed class GameEngine
 
     public IReadOnlyList<StageDefinition> Stages => _definition.Stages;
 
+    public IReadOnlyList<string> Answers => _definition.Answers;
+
     public IReadOnlyList<StageCheckpoint> StageCheckpoints =>
         _definition.Stages
             .Select((stage, index) =>
@@ -106,7 +108,15 @@ public sealed class GameEngine
         if (_hintUsed)
             score /= 2;
 
-        _totalScore += score;
+        CompleteCurrentStage(score);
+    }
+
+    public void CompleteCurrentStage(int score)
+    {
+        if (IsFinished || IsCurrentStageCompleted || !CanCompleteCurrentStage)
+            return;
+
+        _totalScore += Math.Max(0, score);
         _stageStatuses[_currentStageIndex] = StageStatus.Completed;
 
         MoveToNextStage();

@@ -76,16 +76,7 @@ public partial class StagePage : ContentPage
             return;
         }
 
-        engine.CompleteCurrentStage();
-
-        if (engine.IsFinished)
-        {
-            await Shell.Current.GoToAsync("///StartPage/EndPage");
-            return;
-        }
-
-        LoadCurrentStage();
-        _gameSession.StartCurrentStageTimer();
+        await Shell.Current.GoToAsync(nameof(AnswerPage));
     }
 
     private void LoadCurrentStage()
@@ -94,7 +85,11 @@ public partial class StagePage : ContentPage
         var stage = engine.CurrentStage;
         StageTitleLabel.Text = stage.Name;
         StageLongDescriptionLabel.Text = stage.Description;
-        StageScoreLabel.Text = $"Score: {stage.Score}";
+        var availableScore = engine.IsHintUsedForCurrentStage
+            ? stage.Score / 2
+            : stage.Score;
+        StageScoreLabel.Text = $"Available score: {availableScore}";
+        TotalScoreLabel.Text = $"Total score: {engine.TotalScore}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
         BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
 

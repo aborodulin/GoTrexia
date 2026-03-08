@@ -9,5 +9,6 @@ public sealed record StageDefinition(
     GeoPoint SearchLocation,
     GeoPoint HintLocation,
     GeoPoint TargetLocation,
-    int Score
+    int Score,
+    string Answer
 );

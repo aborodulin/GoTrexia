@@ -11,37 +11,48 @@
                VerticalOptions="Fill" />
 
         <Grid Padding="16"
-              RowDefinitions="Auto,Auto,*,Auto"
+              RowDefinitions="Auto,Auto,Auto,*,Auto"
               RowSpacing="10">
-            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*" ColumnSpacing="8">
                 <ImageButton x:Name="BackButtonImage"
                              BackgroundColor="Transparent"
                              WidthRequest="32"
                              HeightRequest="32"
                              Clicked="OnBackClicked" />
 
-                <Label x:Name="StageTitleLabel"
-                       Grid.Column="1"
-                       FontSize="29"
-                       TextColor="White"
-                       HorizontalOptions="Center">
-                    <Label.Shadow>
-                        <Shadow Brush="Black" Offset="0,0" Radius="8" Opacity="1" />
-                    </Label.Shadow>
-                </Label>
+                <Border Grid.Column="1"
+                        BackgroundColor="#66000000"
+                        StrokeThickness="0"
+                        Padding="10,6"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start">
+                    <Label x:Name="TotalScoreLabel"
+                           FontSize="16"
+                           TextColor="White" />
+                </Border>
             </Grid>
 
-            <Label x:Name="StageScoreLabel"
+            <Label x:Name="StageTitleLabel"
                    Grid.Row="1"
+                   FontSize="29"
+                   TextColor="White"
+                   HorizontalOptions="Center">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+                </Label.Shadow>
+            </Label>
+
+            <Label x:Name="StageScoreLabel"
+                   Grid.Row="2"
                    FontSize="19"
                    TextColor="White"
                    HorizontalOptions="Center">
                 <Label.Shadow>
-                    <Shadow Brush="Black" Offset="0,0" Radius="8" Opacity="1" />
+                    <Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
                 </Label.Shadow>
             </Label>
 
-            <Border Grid.Row="2"
+            <Border Grid.Row="3"
                     BackgroundColor="#66000000"
                     StrokeThickness="0"
                     Padding="8">
@@ -53,7 +64,7 @@
                 </ScrollView>
             </Border>
 
-            <Grid Grid.Row="3" ColumnDefinitions="*,*,*" ColumnSpacing="10">
+            <Grid Grid.Row="4" ColumnDefinitions="*,*,*" ColumnSpacing="10">
                 <Button x:Name="MapButton"
                         Text="Map"
                         Grid.Column="0"

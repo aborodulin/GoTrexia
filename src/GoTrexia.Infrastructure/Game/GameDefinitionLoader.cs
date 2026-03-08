@@ -47,8 +47,10 @@ public sealed class GameDefinitionLoader
                     new GeoPoint(stage.SearchLocation.Latitude, stage.SearchLocation.Longitude),
                     new GeoPoint(stage.HintLocation.Latitude, stage.HintLocation.Longitude),
                     new GeoPoint(stage.TargetLocation.Latitude, stage.TargetLocation.Longitude),
-                    stage.Score))
-                .ToList());
+                    stage.Score,
+                    stage.Answer))
+                .ToList(),
+            payload.Answers);
     }
       
 
@@ -56,7 +58,8 @@ public sealed class GameDefinitionLoader
         GameSettingsPayload Settings,
         ScreenPayload StartScreen,
         ScreenPayload EndScreen,
-        IReadOnlyList<StagePayload> Stages);
+        IReadOnlyList<StagePayload> Stages,
+        IReadOnlyList<string> Answers);
 
     private sealed record GameSettingsPayload(
         double MinConfirmationRadiusMeters,
@@ -78,7 +81,8 @@ public sealed class GameDefinitionLoader
         TargetLocationPayload SearchLocation,
         TargetLocationPayload HintLocation,
         TargetLocationPayload TargetLocation,
-        int Score);
+        int Score,
+        string Answer);
 
     private sealed record TargetLocationPayload(
         double Latitude,

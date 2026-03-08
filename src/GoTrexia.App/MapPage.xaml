@@ -11,22 +11,46 @@
                HorizontalOptions="Fill"
                VerticalOptions="Fill" />
 
-        <Grid Padding="16" RowDefinitions="Auto,Auto,*" RowSpacing="10">
-            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+        <Grid Padding="16" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="10">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
                 <ImageButton x:Name="BackButtonImage"
                              BackgroundColor="Transparent"
                              WidthRequest="32"
                              HeightRequest="32"
                              Clicked="OnBackClicked" />
 
-                <Label x:Name="StageTitleLabel"
-                       Grid.Column="1"
-                       FontSize="24"
-                       HorizontalOptions="Center"
-                       TextColor="White" />
+                <Border Grid.Column="2"
+                        BackgroundColor="#66000000"
+                        StrokeThickness="0"
+                        Padding="10,6"
+                        VerticalOptions="Start">
+                    <Label x:Name="TotalScoreLabel"
+                           FontSize="16"
+                           TextColor="White" />
+                </Border>
             </Grid>
 
-            <Grid Grid.Row="1" HeightRequest="48">
+            <Label x:Name="StageTitleLabel"
+                   Grid.Row="1"
+                   FontSize="29"
+                   HorizontalOptions="Center"
+                   TextColor="White">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+                </Label.Shadow>
+            </Label>
+
+            <Label x:Name="AvailableScoreLabel"
+                   Grid.Row="2"
+                   FontSize="19"
+                   HorizontalOptions="Center"
+                   TextColor="White">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+                </Label.Shadow>
+            </Label>
+
+            <Grid Grid.Row="3" HeightRequest="48">
                 <Label x:Name="CountdownLabel"
                        FontSize="20"
                        HorizontalOptions="Center"
@@ -51,7 +75,7 @@
             </Grid>
 
             <maps:Map x:Name="StageMap"
-                      Grid.Row="2" />
+                      Grid.Row="4" />
         </Grid>
     </Grid>
 </ContentPage>

@@ -50,4 +50,10 @@
 	  </MauiAsset>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="AnswerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

@@ -10,28 +10,25 @@
                HorizontalOptions="Fill"
                VerticalOptions="Fill" />
 
+        <Border BackgroundColor="#66000000"
+                StrokeThickness="0"
+                Padding="10,6"
+                Margin="24,24,24,0"
+                HorizontalOptions="End"
+                VerticalOptions="Start">
+            <Label x:Name="TotalScoreLabel"
+                   FontSize="18"
+                   TextColor="White" />
+        </Border>
+
         <Grid Padding="24"
               RowDefinitions="Auto,*,Auto"
               RowSpacing="12">
-            <VerticalStackLayout Grid.Row="0" Spacing="8">
-                <Label x:Name="TitleLabel"
-                       FontSize="30"
-                       HorizontalOptions="Center"
-                       TextColor="White" />
-
-                <Label x:Name="DescriptionLabel"
-                       FontSize="18"
-                       HorizontalOptions="Center"
-                       TextColor="White" />
-
-                <Label x:Name="AuthorLabel"
-                       FontSize="16"
-                       HorizontalOptions="Center"
-                       TextColor="White" />
-            </VerticalStackLayout>
+            <Grid Grid.Row="0" HeightRequest="1" />
 
             <CollectionView x:Name="StagesCollectionView"
-                            Grid.Row="1">
+                            Grid.Row="1"
+                            Margin="0,300,0,0">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border StrokeThickness="0"

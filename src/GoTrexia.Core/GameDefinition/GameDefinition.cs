@@ -4,5 +4,6 @@ public sealed record GameDefinition(
     GameSettings Settings,
     ScreenDefinition StartScreen,
     ScreenDefinition EndScreen,
-    IReadOnlyList<StageDefinition> Stages
+    IReadOnlyList<StageDefinition> Stages,
+    IReadOnlyList<string> Answers
 );

@@ -35,7 +35,8 @@
         "latitude": 37.422774,
         "longitude": -122.087967
       },
-      "score": 100
+      "score": 12,
+	  "answer": "inside tree hollow"
     },
     {
       "name": "The Whispering Ravine",
@@ -53,7 +54,8 @@
         "latitude": 37.422076,
         "longitude": -122.084029
       },
-      "score": 200
+      "score": 8,
+	  "answer": "behind tree roots"
     },
     {
       "name": "The Schoolyard Search",
@@ -71,7 +73,8 @@
         "latitude": 37.420806,
         "longitude": -122.082871
       },
-      "score": 80
+      "score": 8,
+  	  "answer": "inside thick bushes"
     },
     {
       "name": "The Hilltop Trail",
@@ -89,8 +92,40 @@
         "latitude": 49.2827,
         "longitude": -123.1207
       },
-      "score": 140
+      "score": 16,
+	  "answer": "under pine branches"
     }
-
-  ]
+  ],
+  "answers": [
+	"under rotten stump",
+	"inside tree hollow",
+	"under flat rock",
+	"under fallen log",
+	"behind big rock",
+	"inside hollow log",
+	"under pine branches",
+	"under wooden bridge",
+	"behind fern bush",
+	"inside old stump",
+	"near creek stones",
+	"under mossy rock",
+	"behind tree roots",
+	"under wooden bench",
+	"under park sign",
+	"inside fern bush",
+	"behind fallen tree",
+	"under trail marker",
+	"near bridge post",
+	"under pine needles",
+	"inside bush hollow",
+	"under old log",
+	"behind stump roots",
+	"inside rock crack",
+	"under leaf pile",
+	"behind wooden fence",
+	"under small bridge",
+	"near trail sign",
+	"inside thick bushes",
+	"under tree hollow"
+	]
 }

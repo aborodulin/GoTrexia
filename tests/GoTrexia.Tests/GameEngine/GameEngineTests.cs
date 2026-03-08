@@ -18,13 +18,15 @@ public class GameEngineTests
             SearchLocation: new GeoPoint(49.123, -122.456),
             HintLocation: new GeoPoint(49.123, -122.456),
             TargetLocation: new GeoPoint(49.123, -122.456),
-            Score: 100);
+            Score: 100,
+            Answer: "test-answer");
 
         var definition = new GameDefinition(
             Settings: new GameSettings(10, 120, 50, 30, "back.png"),
             StartScreen: new ScreenDefinition("Start", "Start desc", "start.jpg", "Author"),
             EndScreen: new ScreenDefinition("End", "End desc", "end.jpg", ""),
-            Stages: [stage]);
+            Stages: [stage],
+            Answers: ["test-answer", "wrong-1", "wrong-2"]);
 
         var stageCompletionEngine = new StageCompletionEngine(new DistanceCalculator());
         var sut = new global::GameEngine(definition, stageCompletionEngine);

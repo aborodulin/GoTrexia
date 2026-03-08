@@ -30,9 +30,7 @@ public partial class StartPage : ContentPage
             return;
         }
 
-        TitleLabel.Text = engine.StartScreen.Title;
-        DescriptionLabel.Text = engine.StartScreen.Description;
-        AuthorLabel.Text = engine.StartScreen.Author;
+        TotalScoreLabel.Text = $"Total score: {engine.TotalScore}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, engine.StartScreen.BackgroundImage);
         StagesCollectionView.ItemsSource = engine.StageCheckpoints;
 

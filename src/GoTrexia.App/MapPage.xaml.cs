@@ -46,11 +46,26 @@ public partial class MapPage : ContentPage
         await Shell.Current.GoToAsync("///StartPage/StagePage");
     }
 
-    private void OnHintClicked(object? sender, EventArgs e)
+    private async void OnHintClicked(object? sender, EventArgs e)
     {
         var engine = _gameSession.Engine!;
-        if (engine.IsCurrentStageCompleted || engine.IsHintUsedForCurrentStage)
+        if (engine.IsCurrentStageCompleted)
         {
+            return;
+        }
+
+        if (engine.IsHintUsedForCurrentStage)
+        {
+            engine.Skip();
+
+            if (engine.IsFinished)
+            {
+                await Shell.Current.GoToAsync("///StartPage/EndPage");
+                return;
+            }
+
+            _gameSession.StartCurrentStageTimer();
+            await Shell.Current.GoToAsync("///StartPage/StagePage");
             return;
         }
 
@@ -63,8 +78,13 @@ public partial class MapPage : ContentPage
     {
         var engine = _gameSession.Engine!;
         var stage = engine.CurrentStage;
+        var availableScore = engine.IsHintUsedForCurrentStage
+            ? stage.Score / 2
+            : stage.Score;
 
         StageTitleLabel.Text = stage.Name;
+        AvailableScoreLabel.Text = $"Available score: {availableScore}";
+        TotalScoreLabel.Text = $"Total score: {engine.TotalScore}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
         BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
 
@@ -133,8 +153,10 @@ public partial class MapPage : ContentPage
         CountdownLabel.IsVisible = false;
         HintButton.IsVisible = true;
         CompleteButton.IsVisible = false;
-        HintButton.IsEnabled = !_gameSession.Engine!.IsHintUsedForCurrentStage;
-        HintButton.Text = _gameSession.Engine.IsHintUsedForCurrentStage ? "Hint used" : "Hint";
+
+        var isHintUsed = _gameSession.Engine!.IsHintUsedForCurrentStage;
+        HintButton.IsEnabled = true;
+        HintButton.Text = isHintUsed ? "Skip" : "Hint";
     }
 
     private async Task EnableLocationAsync()
@@ -179,16 +201,7 @@ public partial class MapPage : ContentPage
             return;
         }
 
-        engine.CompleteCurrentStage();
-
-        if (engine.IsFinished)
-        {
-            await Shell.Current.GoToAsync("///StartPage/EndPage");
-            return;
-        }
-
-        _gameSession.StartCurrentStageTimer();
-        await Shell.Current.GoToAsync("///StartPage/StagePage");
+        await Shell.Current.GoToAsync(nameof(AnswerPage));
     }
 
     private static string BuildImagePath(string? rootFolder, string fileName)
