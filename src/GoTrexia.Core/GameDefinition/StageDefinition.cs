@@ -6,6 +6,7 @@ public sealed record StageDefinition(
     string Name,
     string Description,
     string BackgroundImage,
+    int HintButtonTimeoutSeconds,
     GeoPoint SearchLocation,
     GeoPoint HintLocation,
     GeoPoint TargetLocation,

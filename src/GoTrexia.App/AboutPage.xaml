@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
+             SafeAreaEdges="None"
+             x:Class="GoTrexia.AboutPage">
+    <Grid>
+        <Image x:Name="BackgroundImage"
+               Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill" />
+
+        <Grid Padding="16"
+              RowDefinitions="Auto,Auto,Auto,*,Auto"
+              RowSpacing="10">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                <ImageButton x:Name="BackButtonImage"
+                             BackgroundColor="Transparent"
+                             WidthRequest="32"
+                             HeightRequest="32"
+                             Clicked="OnBackClicked" />
+            </Grid>
+
+            <Label x:Name="TitleLabel"
+                   Grid.Row="1"
+                   FontSize="29"
+                   TextColor="White"
+                   HorizontalOptions="Center">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+                </Label.Shadow>
+            </Label>
+
+            <Label x:Name="TotalGameScoreLabel"
+                   Grid.Row="2"
+                   FontSize="20"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <Border Grid.Row="3"
+                    BackgroundColor="#66000000"
+                    StrokeThickness="0"
+                    Padding="8">
+                <ScrollView>
+                    <Label x:Name="DescriptionLabel"
+                           FontSize="20"
+                           TextColor="White"
+                           LineBreakMode="WordWrap" />
+                </ScrollView>
+            </Border>
+
+            <Label x:Name="AuthorLabel"
+                   Grid.Row="4"
+                   FontSize="18"
+                   TextColor="White"
+                   HorizontalOptions="Center">
+                <Label.Shadow>
+                    <Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+                </Label.Shadow>
+            </Label>
+        </Grid>
+    </Grid>
+</ContentPage>

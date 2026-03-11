@@ -15,6 +15,7 @@ public class GameEngineTests
             Name: "Stage 1",
             Description: "Test stage",
             BackgroundImage: "stage1.jpg",
+            HintButtonTimeoutSeconds: 30,
             SearchLocation: new GeoPoint(49.123, -122.456),
             HintLocation: new GeoPoint(49.123, -122.456),
             TargetLocation: new GeoPoint(49.123, -122.456),

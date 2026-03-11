@@ -61,6 +61,11 @@ public partial class StartPage : ContentPage
         await Shell.Current.GoToAsync("///StartPage/StagePage");
     }
 
+    private async void OnAboutClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AboutPage));
+    }
+
     private void EnsureServices()
     {
         if (_gameSession is not null)

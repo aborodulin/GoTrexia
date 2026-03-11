@@ -40,7 +40,7 @@ public sealed class GameSession
             return 0;
         }
 
-        var timeout = Engine.Settings.HintButtonTimeoutSeconds;
+        var timeout = Engine.CurrentStage.HintButtonTimeoutSeconds;
         var stageIndex = Engine.CurrentStageIndex;
 
         if (!_stageStartedAt.TryGetValue(stageIndex, out var startedAt))

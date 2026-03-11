@@ -22,7 +22,7 @@
         </Border>
 
         <Grid Padding="24"
-              RowDefinitions="Auto,*,Auto"
+              RowDefinitions="Auto,*,Auto,Auto"
               RowSpacing="12">
             <Grid Grid.Row="0" HeightRequest="1" />
 
@@ -58,6 +58,12 @@
                     Grid.Row="2"
                     Text="Start"
                     Clicked="OnStartClicked"
+                    VerticalOptions="End" />
+
+            <Button x:Name="AboutButton"
+                    Grid.Row="3"
+                    Text="About"
+                    Clicked="OnAboutClicked"
                     VerticalOptions="End" />
         </Grid>
     </Grid>

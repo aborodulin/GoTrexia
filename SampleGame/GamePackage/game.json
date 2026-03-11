@@ -1,28 +1,28 @@
 {
   "settings": {
-    "minConfirmationRadiusMeters": 20,
+    "minConfirmationRadiusMeters": 7,
     "maxSearchRadiusMeters": 120,
     "hintRadiusMeters": 50,
-    "hintButtonTimeoutSeconds": 30,
     "backButton": "backbutton.png"
   },
   "startScreen": {
     "title": "Easter Forest Hunt",
-    "description": "Find hidden eggs in the pine forest near the creek.",
+    "description": "GoTrexia is a treasure hunt game about finding hidden Easter eggs in real-world locations. Each stage takes you to a different place — it might be a forest, a creek, a playground, or the top of a hiking trail. At the start of each stage you will see a description with clues about what to look for in the area. The map shows a circular search zone, but the secret egg is not necessarily in the center — it can be hidden anywhere inside the circle. You can activate a hint that narrows the search area, but using a hint reduces the score for that stage by half. When you get close enough to the hidden location, the game will ask a question about where you found the egg. If you choose the correct answer, you earn the stage points (taking hints into account). If the answer is incorrect, you get one more attempt, but the remaining points are reduced by half again. If the second answer is also wrong, the score for that stage becomes zero. For example: if a stage is worth 8 points, using a hint reduces it to 4 points, and one incorrect answer reduces it again to 2 points. Explore carefully, pay attention to the clues, and see how many eggs you can find!",
     "backgroundImage": "start.jpg",
-    "author": "Andrey"
+    "author": "Author: Andrey"
   },
   "endScreen": {
     "title": "Congratulations!",
-    "description": "You collected all Easter treasures!",
+    "description": "You completed all stages of Easter Egg Hunt!",
     "backgroundImage": "end.jpg",
-    "author": ""
+    "author": "Author: Andrey"
   },
   "stages": [
     {
       "name": "Old Oak Tree",
       "description": "Search near the big oak tree by the stream.",
       "backgroundImage": "stage1.jpg",
+      "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
         "latitude": 37.422774,
         "longitude": -122.087967
@@ -42,6 +42,7 @@
       "name": "The Whispering Ravine",
       "description": "Your journey now leads you away from open spaces and into a quiet forest ravine. The ground slopes downward, and a small stream flows gently along the bottom, weaving its way between stones and fallen branches. The tall trees above create a soft canopy that filters the sunlight, giving the place a mysterious and slightly darker atmosphere. This is the perfect place for a hidden treasure. Somewhere along the ravine, close to the stream or tucked beside an old tree root, an Easter egg waits to be discovered. Listen to the sound of the water and take your time exploring the surroundings. Check near rocks, fallen logs, and patches of grass along the water’s edge. The treasure may be closer than you think, but the forest likes to keep its secrets.",
       "backgroundImage": "creekStage.jpg",
+      "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
         "latitude": 37.422076,
         "longitude": -122.084029
@@ -61,6 +62,7 @@
       "name": "The Schoolyard Search",
       "description": "Welcome to the first stage of the treasure hunt! Your adventure begins in the familiar surroundings of a Canadian schoolyard. Around you are wide open spaces: the grassy football field, tall evergreen trees swaying gently in the wind, and the school building standing quietly in the background. Somewhere in this area a small Easter treasure has been carefully hidden. It might be near the edge of the field, close to the trees, or perhaps beside a bench where students usually sit during recess. Take a slow walk around and pay attention to details. Look near bushes, tree roots, or places where colorful eggs could blend into the scenery. Remember, the treasure is hidden well but not impossible to find. Explore carefully and enjoy the start of your adventure!",
       "backgroundImage": "playyardstage.jpg",
+      "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
         "latitude": 37.420806,
         "longitude": -122.082871
@@ -80,6 +82,7 @@
       "name": "The Hilltop Trail",
       "description": "For the final stage of your adventure, follow the hiking trail that climbs steadily up the hillside. The path winds through tall evergreen trees and rocky ground, leading you higher and higher above the forest. As you reach the upper part of the trail, the view opens up and the city can be seen stretching out far below. Power lines cross the landscape in the distance, and the wind feels stronger here at the top. Somewhere near this scenic lookout, the final treasure has been hidden. It could be near a rock, beside the trail, or tucked quietly among the grass and roots of the trees. Take a moment to enjoy the view before you begin searching. The last Easter egg of your quest is waiting for you here — can you find it?",
       "backgroundImage": "hillStage.jpg",
+      "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
         "latitude": 49.2827,
         "longitude": -123.1207
