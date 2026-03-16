@@ -74,7 +74,7 @@ public sealed class GameEngine
     public StageState UpdatePlayerPosition(GeoPoint playerLocation)
     {
         var settings = new StageSettings(
-            _definition.Settings.MinConfirmationRadiusMeters);
+            CurrentStage.TargetLocation.RadiusMeters);
 
         _currentStageState =
             _stageCompletionEngine.UpdatePosition(

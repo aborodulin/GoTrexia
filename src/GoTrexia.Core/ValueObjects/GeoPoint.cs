@@ -1,3 +1,3 @@
 namespace GoTrexia.Core.ValueObjects;
 
-public sealed record GeoPoint(double Latitude, double Longitude);
+public sealed record GeoPoint(double Latitude, double Longitude, double RadiusMeters = 0);

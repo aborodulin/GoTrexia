@@ -23,7 +23,7 @@ public class GameEngineTests
             Answer: "test-answer");
 
         var definition = new GameDefinition(
-            Settings: new GameSettings(10, 120, 50, 30, "back.png"),
+            Settings: new GameSettings("back.png"),
             StartScreen: new ScreenDefinition("Start", "Start desc", "start.jpg", "Author"),
             EndScreen: new ScreenDefinition("End", "End desc", "end.jpg", ""),
             Stages: [stage],

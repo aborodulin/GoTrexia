@@ -88,8 +88,8 @@ public partial class StagePage : ContentPage
         var availableScore = engine.IsHintUsedForCurrentStage
             ? stage.Score / 2
             : stage.Score;
-        StageScoreLabel.Text = $"Available score: {availableScore}";
-        TotalScoreLabel.Text = $"Total score: {engine.TotalScore}";
+        StageScoreLabel.Text = $"Stage score: {availableScore}";
+        TotalScoreLabel.Text = $"Stage: {availableScore}, Total: {engine.TotalScore}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
         BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
 

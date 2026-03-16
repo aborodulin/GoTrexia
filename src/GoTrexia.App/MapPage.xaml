@@ -19,6 +19,14 @@
                              HeightRequest="32"
                              Clicked="OnBackClicked" />
 
+                <Button x:Name="MapModeButton"
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="40"
+                        Text="Map"
+                        Clicked="OnMapModeButtonClicked" />
+
                 <Border Grid.Column="2"
                         BackgroundColor="#66000000"
                         StrokeThickness="0"
@@ -40,10 +48,11 @@
                 </Label.Shadow>
             </Label>
 
-            <Label x:Name="AvailableScoreLabel"
+            <Label x:Name="HintLabel"
                    Grid.Row="2"
                    FontSize="19"
                    HorizontalOptions="Center"
+                   IsVisible="True"
                    TextColor="White">
                 <Label.Shadow>
                     <Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />

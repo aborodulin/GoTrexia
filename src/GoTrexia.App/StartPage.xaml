@@ -44,9 +44,6 @@
                                     <Label Text="{Binding Name}"
                                            FontSize="18"
                                            TextColor="White" />
-                                    <Label Text="{Binding Score, StringFormat='Score: {0}'}"
-                                           FontSize="12"
-                                           TextColor="White" />
                                 </VerticalStackLayout>
                             </Grid>
                         </Border>

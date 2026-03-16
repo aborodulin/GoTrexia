@@ -23,22 +23,38 @@
             <Label x:Name="TitleLabel"
                    FontSize="30"
                    HorizontalOptions="Center"
-                   TextColor="White" />
+                   TextColor="White">
+				<Label.Shadow>
+					<Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+				</Label.Shadow>
+			</Label>
 
             <Label x:Name="DescriptionLabel"
                    FontSize="18"
                    HorizontalOptions="Center"
-                   TextColor="White" />
+                   TextColor="White">
+				<Label.Shadow>
+					<Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+				</Label.Shadow>
+			</Label>
 
             <Label x:Name="AuthorLabel"
                    FontSize="16"
                    HorizontalOptions="Center"
-                   TextColor="White" />
+                   TextColor="White">
+				<Label.Shadow>
+					<Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+				</Label.Shadow>
+			</Label>
 
             <Label x:Name="ScoreLabel"
                    FontSize="24"
                    HorizontalOptions="Center"
-                   TextColor="White" />
+                   TextColor="White">
+				<Label.Shadow>
+					<Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+				</Label.Shadow>
+			</Label>
 
             <Button Text="Back to Start"
                     Clicked="OnBackToStartClicked" />

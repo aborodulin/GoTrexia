@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net10.0-android</TargetFramework>
 		<SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
-		<OutputType>Exe</OutputType>
+        <OutputType>Exe</OutputType>
+		<RuntimeIdentifiers>android-arm64;android-x64</RuntimeIdentifiers>
 		<RootNamespace>GoTrexia</RootNamespace>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -15,22 +15,20 @@
 		     For individual files, you can override by setting Inflator metadata:
 		       <MauiXaml Update="MyPage.xaml" Inflator="Default" /> (reverts to defaults: Runtime for Debug, XamlC for Release)
 		       <MauiXaml Update="MyPage.xaml" Inflator="Runtime" /> (force runtime inflation) -->
-		<MauiXamlInflator>SourceGen</MauiXamlInflator>
+		<!-- <MauiXamlInflator>SourceGen</MauiXamlInflator> -->
+      <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<AndroidKeyStore>false</AndroidKeyStore>
+	</PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<AndroidKeyStore>true</AndroidKeyStore>
 		<AndroidSigningKeyStore>gotrexia-release.keystore</AndroidSigningKeyStore>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <AndroidKeyStore>False</AndroidKeyStore>
-	  <AndroidSigningStorePass>gotrexiakkk</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>myapp</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>gotrexiakkk</AndroidSigningKeyPass>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <AndroidKeyStore>False</AndroidKeyStore>
-	  <AndroidSigningStorePass>gotrexiakkk</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>myapp</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>gotrexiakkk</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>gotrexiakkk</AndroidSigningStorePass>
+		<AndroidSigningKeyAlias>myapp</AndroidSigningKeyAlias>
+		<AndroidSigningKeyPass>gotrexiakkk</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<ItemGroup>

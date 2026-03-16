@@ -10,10 +10,20 @@ public partial class MapPage : ContentPage
     private IDispatcherTimer? _timer;
     private bool _hasLocationPermission;
     private bool _permissionInitialized;
+    private int _mapModeIndex;
+
+    private static readonly IReadOnlyList<(string Label, Microsoft.Maui.Maps.MapType Type)> MapModes =
+    [
+        ("Map", Microsoft.Maui.Maps.MapType.Street),
+        ("Satellite", Microsoft.Maui.Maps.MapType.Satellite),
+        ("Hybrid", Microsoft.Maui.Maps.MapType.Hybrid)
+    ];
 
     public MapPage()
     {
         InitializeComponent();
+
+        ApplyMapMode(0);
 
         var services = Microsoft.Maui.Controls.Application.Current?.Handler?.MauiContext?.Services
             ?? throw new InvalidOperationException("Service provider is not available.");
@@ -74,6 +84,20 @@ public partial class MapPage : ContentPage
         UpdateCountdown();
     }
 
+    private void OnMapModeButtonClicked(object? sender, EventArgs e)
+    {
+        var nextIndex = (_mapModeIndex + 1) % MapModes.Count;
+        ApplyMapMode(nextIndex);
+    }
+
+    private void ApplyMapMode(int index)
+    {
+        _mapModeIndex = index;
+        var mapMode = MapModes[_mapModeIndex];
+        StageMap.MapType = mapMode.Type;
+        MapModeButton.Text = mapMode.Label;
+    }
+
     private void LoadCurrentStageMap()
     {
         var engine = _gameSession.Engine!;
@@ -83,15 +107,16 @@ public partial class MapPage : ContentPage
             : stage.Score;
 
         StageTitleLabel.Text = stage.Name;
-        AvailableScoreLabel.Text = $"Available score: {availableScore}";
-        TotalScoreLabel.Text = $"Total score: {engine.TotalScore}";
+        TotalScoreLabel.Text = $"Stage: {availableScore}, Total: {engine.TotalScore}";
+        HintLabel.Text = "Go to search area";
+        HintLabel.IsVisible = true;
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, stage.BackgroundImage);
         BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
 
         var isHintUsed = engine.IsHintUsedForCurrentStage;
         var radiusMeters = isHintUsed
-            ? engine.Settings.HintRadiusMeters
-            : engine.Settings.MaxSearchRadiusMeters;
+            ? stage.HintLocation.RadiusMeters
+            : stage.SearchLocation.RadiusMeters;
 
         var locationSource = isHintUsed ? stage.HintLocation : stage.SearchLocation;
         var center = new Location(locationSource.Latitude, locationSource.Longitude);
@@ -128,12 +153,30 @@ public partial class MapPage : ContentPage
     private void UpdateCountdown()
     {
         var engine = _gameSession.Engine!;
+        var canComplete = engine.CanCompleteCurrentStage;
+        var isHintUsed = engine.IsHintUsedForCurrentStage;
 
-        if (engine.CanCompleteCurrentStage)
+        CompleteButton.IsEnabled = canComplete;
+
+        if (canComplete)
         {
             CountdownLabel.IsVisible = false;
             HintButton.IsVisible = false;
             CompleteButton.IsVisible = true;
+            HintLabel.IsVisible = true;
+            HintLabel.Text = "Have you found? Press Complete!";
+            return;
+        }
+
+        if (isHintUsed)
+        {
+            CountdownLabel.IsVisible = false;
+            CompleteButton.IsVisible = false;
+            HintLabel.IsVisible = true;
+            HintLabel.Text = "Skip stage if it's too hard";
+            HintButton.IsVisible = true;
+            HintButton.IsEnabled = true;
+            HintButton.Text = "Skip";
             return;
         }
 
@@ -147,16 +190,18 @@ public partial class MapPage : ContentPage
             CountdownLabel.IsVisible = true;
             HintButton.IsVisible = false;
             CompleteButton.IsVisible = false;
+            HintLabel.IsVisible = true;
+            HintLabel.Text = "Go to search area";
             return;
         }
 
         CountdownLabel.IsVisible = false;
-        HintButton.IsVisible = true;
         CompleteButton.IsVisible = false;
-
-        var isHintUsed = _gameSession.Engine!.IsHintUsedForCurrentStage;
+        HintLabel.IsVisible = true;
+        HintLabel.Text = "Using hint will reduce score";
+        HintButton.IsVisible = true;
         HintButton.IsEnabled = true;
-        HintButton.Text = isHintUsed ? "Skip" : "Hint";
+        HintButton.Text = "Hint";
     }
 
     private async Task EnableLocationAsync()

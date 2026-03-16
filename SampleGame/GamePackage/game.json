@@ -1,8 +1,5 @@
 {
   "settings": {
-    "minConfirmationRadiusMeters": 7,
-    "maxSearchRadiusMeters": 120,
-    "hintRadiusMeters": 50,
     "backButton": "backbutton.png"
   },
   "startScreen": {
@@ -19,84 +16,165 @@
   },
   "stages": [
     {
-      "name": "Old Oak Tree",
-      "description": "Search near the big oak tree by the stream.",
-      "backgroundImage": "stage1.jpg",
-      "hintButtonTimeoutSeconds": 30,
-      "targetLocation": {
-        "latitude": 37.422774,
-        "longitude": -122.087967
-      },
-      "hintLocation": {
-        "latitude": 37.422774,
-        "longitude": -122.087967
-      },
-      "searchLocation": {
-        "latitude": 37.422774,
-        "longitude": -122.087967
-      },
-      "score": 12,
-	  "answer": "inside tree hollow"
-    },
-    {
-      "name": "The Whispering Ravine",
-      "description": "Your journey now leads you away from open spaces and into a quiet forest ravine. The ground slopes downward, and a small stream flows gently along the bottom, weaving its way between stones and fallen branches. The tall trees above create a soft canopy that filters the sunlight, giving the place a mysterious and slightly darker atmosphere. This is the perfect place for a hidden treasure. Somewhere along the ravine, close to the stream or tucked beside an old tree root, an Easter egg waits to be discovered. Listen to the sound of the water and take your time exploring the surroundings. Check near rocks, fallen logs, and patches of grass along the water’s edge. The treasure may be closer than you think, but the forest likes to keep its secrets.",
-      "backgroundImage": "creekStage.jpg",
-      "hintButtonTimeoutSeconds": 30,
-      "targetLocation": {
-        "latitude": 37.422076,
-        "longitude": -122.084029
-      },
-      "hintLocation": {
-        "latitude": 37.422076,
-        "longitude": -122.084029
-      },
-      "searchLocation": {
-        "latitude": 37.422076,
-        "longitude": -122.084029
-      },
-      "score": 8,
-	  "answer": "behind tree roots"
-    },
-    {
-      "name": "The Schoolyard Search",
+      "name": "Back to childhood",
       "description": "Welcome to the first stage of the treasure hunt! Your adventure begins in the familiar surroundings of a Canadian schoolyard. Around you are wide open spaces: the grassy football field, tall evergreen trees swaying gently in the wind, and the school building standing quietly in the background. Somewhere in this area a small Easter treasure has been carefully hidden. It might be near the edge of the field, close to the trees, or perhaps beside a bench where students usually sit during recess. Take a slow walk around and pay attention to details. Look near bushes, tree roots, or places where colorful eggs could blend into the scenery. Remember, the treasure is hidden well but not impossible to find. Explore carefully and enjoy the start of your adventure!",
       "backgroundImage": "playyardstage.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
-        "latitude": 37.420806,
-        "longitude": -122.082871
+        "radius": 3,
+        "latitude": 49.300780955654474, 
+        "longitude": -122.81022720298816
       },
       "hintLocation": {
-        "latitude": 37.420806,
-        "longitude": -122.082871
+        "radius": 15,
+        "latitude": 49.30073158477558, 
+        "longitude": -122.81023018664824
       },
       "searchLocation": {
-        "latitude": 37.420806,
-        "longitude": -122.082871
+        "radius": 50,
+        "latitude": 49.30051439822196, 
+        "longitude": -122.81052214510781
       },
       "score": 8,
   	  "answer": "inside thick bushes"
     },
     {
+      "name": "The Whispering Ravine",
+      "description": "Your journey now leads you away from open spaces and into a quiet forest ravine. The ground slopes downward, and a small stream flows gently along the bottom, weaving its way between stones and fallen branches. The tall trees above create a soft canopy that filters the sunlight, giving the place a mysterious and slightly darker atmosphere. This is the perfect place for a hidden treasure. Somewhere along the ravine, close to the stream or tucked beside an old tree root, an Easter egg waits to be discovered. Listen to the sound of the water and take your time exploring the surroundings. Check near rocks, fallen logs, and patches of grass along the water’s edge. The treasure may be closer than you think, but the forest likes to keep its secrets.",
+      "backgroundImage": "creekStage.jpg",
+      "hintButtonTimeoutSeconds": 10,
+      "targetLocation": {
+        "radius": 3,
+        "latitude": 49.30255524037856, 
+        "longitude": -122.81197677931083
+      },
+      "hintLocation": {
+        "radius": 15,
+        "latitude": 49.30253439270694, 
+        "longitude": -122.81199527095448
+      },
+      "searchLocation": {
+        "radius": 50,
+        "latitude": 49.302711730045345, 
+        "longitude": -122.81196430067399
+      },
+      "score": 8,
+	  "answer": "behind tree roots"
+    },
+    {
       "name": "The Hilltop Trail",
       "description": "For the final stage of your adventure, follow the hiking trail that climbs steadily up the hillside. The path winds through tall evergreen trees and rocky ground, leading you higher and higher above the forest. As you reach the upper part of the trail, the view opens up and the city can be seen stretching out far below. Power lines cross the landscape in the distance, and the wind feels stronger here at the top. Somewhere near this scenic lookout, the final treasure has been hidden. It could be near a rock, beside the trail, or tucked quietly among the grass and roots of the trees. Take a moment to enjoy the view before you begin searching. The last Easter egg of your quest is waiting for you here — can you find it?",
       "backgroundImage": "hillStage.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 10,
       "targetLocation": {
-        "latitude": 49.2827,
-        "longitude": -123.1207
+        "radius": 3,
+        "latitude": 49.3034157587787, 
+        "longitude": -122.81555589157621
       },
       "hintLocation": {
-        "latitude": 49.2827,
-        "longitude": -123.1207
+        "radius": 15,
+        "latitude": 49.303486721916585, 
+        "longitude": -122.81543130099169
       },
       "searchLocation": {
-        "latitude": 49.2827,
-        "longitude": -123.1207
+        "radius": 50,
+        "latitude": 49.303509031893974, 
+        "longitude": -122.81534548300043
       },
       "score": 16,
 	  "answer": "under pine branches"
+    },
+    {
+      "name": "Rotten stump",
+      "description": "Search near the big oak tree by the stream.",
+      "backgroundImage": "rottenstump.jpg",
+      "hintButtonTimeoutSeconds": 30,
+      "targetLocation": {
+        "radius": 3,
+        "latitude": 49.304125301590986, 
+        "longitude": -122.81276614348776
+      },
+      "hintLocation": {
+        "radius": 15,
+        "latitude": 49.30421380415278, 
+        "longitude": -122.81275020640899
+      },
+      "searchLocation": {
+        "radius": 50,
+        "latitude": 49.30429809046237, 
+        "longitude": -122.81289968550199
+      },
+      "score": 12,
+	  "answer": "inside tree hollow"
+    },
+    {
+      "name": "Bridge",
+      "description": "Search near the big oak tree by the stream.",
+      "backgroundImage": "bigbridge.jpg",
+      "hintButtonTimeoutSeconds": 30,
+      "targetLocation": {
+        "radius": 3,
+        "latitude": 49.30501367589216,
+        "longitude": -122.81061747972967
+      },
+      "hintLocation": {
+        "radius": 15,
+        "latitude": 49.305099710014204, 
+        "longitude": -122.81086836429803
+      },
+      "searchLocation": {
+        "radius": 50,
+        "latitude": 49.305099710014204, 
+        "longitude": -122.81086836429803
+      },
+      "score": 12,
+	  "answer": "inside tree hollow"
+    },
+    {
+      "name": "Work yard",
+      "description": "Search near the big oak tree by the stream.",
+      "backgroundImage": "workyard.jpg",
+      "hintButtonTimeoutSeconds": 30,
+      "targetLocation": {
+        "radius": 3,
+        "latitude": 49.30534900713147, 
+        "longitude": -122.80587637852669
+      },
+      "hintLocation": {
+        "radius": 15,
+        "latitude": 49.30527988956327, 
+        "longitude": -122.80597443080713
+      },
+      "searchLocation": {
+        "radius": 50,
+        "latitude": 49.30520328620391, 
+        "longitude": -122.80578593842826
+      },
+      "score": 12,
+	  "answer": "inside tree hollow"
+    },
+    {
+      "name": "Dark forest",
+      "description": "Search near the big oak tree by the stream.",
+      "backgroundImage": "darkforest.jpg",
+      "hintButtonTimeoutSeconds": 30,
+      "targetLocation": {
+        "radius": 3,
+        "latitude": 49.304827553872826, 
+        "longitude": -122.8037566186652
+      },
+      "hintLocation": {
+        "radius": 15,
+        "latitude": 49.304805560702334, 
+        "longitude": -122.80379734813205
+      },
+      "searchLocation": {
+        "radius": 50,
+        "latitude": 49.30467924201518, 
+        "longitude": -122.80376668767471
+      },
+      "score": 12,
+	  "answer": "inside tree hollow"
     }
   ],
   "answers": [

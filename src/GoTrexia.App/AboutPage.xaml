@@ -31,11 +31,15 @@
                 </Label.Shadow>
             </Label>
 
-            <Label x:Name="TotalGameScoreLabel"
+			<Label x:Name="TotalGameScoreLabel"
                    Grid.Row="2"
                    FontSize="20"
                    TextColor="White"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center">
+				<Label.Shadow>
+					<Shadow Brush="Black" Offset="2,2" Radius="8" Opacity="1" />
+				</Label.Shadow>
+			</Label>
 
             <Border Grid.Row="3"
                     BackgroundColor="#66000000"

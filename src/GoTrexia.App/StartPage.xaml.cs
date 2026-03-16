@@ -30,7 +30,8 @@ public partial class StartPage : ContentPage
             return;
         }
 
-        TotalScoreLabel.Text = $"Total score: {engine.TotalScore}";
+        var gameScore = engine.Stages.Sum(stage => stage.Score);
+        TotalScoreLabel.Text = $"Game: {gameScore}, Total: {engine.TotalScore}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, engine.StartScreen.BackgroundImage);
         StagesCollectionView.ItemsSource = engine.StageCheckpoints;
 
