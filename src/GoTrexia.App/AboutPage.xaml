@@ -44,7 +44,8 @@
             <Border Grid.Row="3"
                     BackgroundColor="#66000000"
                     StrokeThickness="0"
-                    Padding="8">
+                    Padding="8"
+                    Margin="0,170,0,0">
                 <ScrollView>
                     <Label x:Name="DescriptionLabel"
                            FontSize="20"
