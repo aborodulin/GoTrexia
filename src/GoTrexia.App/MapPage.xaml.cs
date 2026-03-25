@@ -11,6 +11,7 @@ public partial class MapPage : ContentPage
     private bool _hasLocationPermission;
     private bool _permissionInitialized;
     private int _mapModeIndex;
+    private bool _isSkipTargetRevealed;
 
     private static readonly IReadOnlyList<(string Label, Microsoft.Maui.Maps.MapType Type)> MapModes =
     [
@@ -35,6 +36,7 @@ public partial class MapPage : ContentPage
     {
         base.OnAppearing();
 
+        _isSkipTargetRevealed = false;
         LoadCurrentStageMap();
         StartCountdown();
         _ = EnableLocationAsync();
@@ -66,6 +68,14 @@ public partial class MapPage : ContentPage
 
         if (engine.IsHintUsedForCurrentStage)
         {
+            if (!_isSkipTargetRevealed)
+            {
+                _isSkipTargetRevealed = true;
+                LoadCurrentStageMap();
+                UpdateCountdown();
+                return;
+            }
+
             engine.Skip();
 
             if (engine.IsFinished)
@@ -80,6 +90,7 @@ public partial class MapPage : ContentPage
         }
 
         engine.UseHint();
+        _isSkipTargetRevealed = false;
         LoadCurrentStageMap();
         UpdateCountdown();
     }
@@ -114,11 +125,18 @@ public partial class MapPage : ContentPage
         BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
 
         var isHintUsed = engine.IsHintUsedForCurrentStage;
-        var radiusMeters = isHintUsed
-            ? stage.HintLocation.RadiusMeters
-            : stage.SearchLocation.RadiusMeters;
+        var showTargetArea = isHintUsed && _isSkipTargetRevealed;
+        var radiusMeters = showTargetArea
+            ? stage.TargetLocation.RadiusMeters
+            : isHintUsed
+                ? stage.HintLocation.RadiusMeters
+                : stage.SearchLocation.RadiusMeters;
 
-        var locationSource = isHintUsed ? stage.HintLocation : stage.SearchLocation;
+        var locationSource = showTargetArea
+            ? stage.TargetLocation
+            : isHintUsed
+                ? stage.HintLocation
+                : stage.SearchLocation;
         var center = new Location(locationSource.Latitude, locationSource.Longitude);
 
         StageMap.MapElements.Clear();
@@ -126,9 +144,13 @@ public partial class MapPage : ContentPage
         {
             Center = center,
             Radius = Microsoft.Maui.Maps.Distance.FromMeters(radiusMeters),
-            StrokeColor = Color.FromRgb(204, 153, 0),
+            StrokeColor = showTargetArea
+                ? Color.FromRgb(220, 53, 69)
+                : Color.FromRgb(204, 153, 0),
             StrokeWidth = 4,
-            FillColor = Color.FromRgba(255, 255, 153, 128)
+            FillColor = showTargetArea
+                ? Color.FromRgba(220, 53, 69, 76)
+                : Color.FromRgba(255, 255, 153, 128)
         });
 
         StageMap.MoveToRegion(Microsoft.Maui.Maps.MapSpan.FromCenterAndRadius(
@@ -173,10 +195,12 @@ public partial class MapPage : ContentPage
             CountdownLabel.IsVisible = false;
             CompleteButton.IsVisible = false;
             HintLabel.IsVisible = true;
-            HintLabel.Text = "Skip stage if it's too hard";
+            HintLabel.Text = _isSkipTargetRevealed
+                ? "Target area highlighted. Tap Next"
+                : "Skip stage if it's too hard";
             HintButton.IsVisible = true;
             HintButton.IsEnabled = true;
-            HintButton.Text = "Skip";
+            HintButton.Text = _isSkipTargetRevealed ? "Next" : "Skip";
             return;
         }
 

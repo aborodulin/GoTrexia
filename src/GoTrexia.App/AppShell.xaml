@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GoTrexia"
     Shell.FlyoutBehavior="Disabled"
-    NavBarIsVisible="False"
+    Shell.NavBarIsVisible="False"
     Title="GoTrexia">
 
     <ShellContent

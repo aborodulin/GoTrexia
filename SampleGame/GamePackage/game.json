@@ -19,9 +19,9 @@
       "name": "Back to childhood",
       "description": "Welcome to the first stage of the treasure hunt! Your adventure begins in the familiar surroundings of a Canadian schoolyard. Around you are wide open spaces: the grassy football field, tall evergreen trees swaying gently in the wind, and the school building standing quietly in the background. Somewhere in this area a small Easter treasure has been carefully hidden. It might be near the edge of the field, close to the trees, or perhaps beside a bench where students usually sit during recess. Take a slow walk around and pay attention to details. Look near bushes, tree roots, or places where colorful eggs could blend into the scenery. Remember, the treasure is hidden well but not impossible to find. Explore carefully and enjoy the start of your adventure!",
       "backgroundImage": "playyardstage.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
-        "radius": 3,
+        "radius": 5,
         "latitude": 49.300780955654474, 
         "longitude": -122.81022720298816
       },
@@ -42,11 +42,11 @@
       "name": "The Whispering Ravine",
       "description": "Your journey now leads you away from open spaces and into a quiet forest ravine. The ground slopes downward, and a small stream flows gently along the bottom, weaving its way between stones and fallen branches. The tall trees above create a soft canopy that filters the sunlight, giving the place a mysterious and slightly darker atmosphere. This is the perfect place for a hidden treasure. Somewhere along the ravine, close to the stream or tucked beside an old tree root, an Easter egg waits to be discovered. Listen to the sound of the water and take your time exploring the surroundings. Check near rocks, fallen logs, and patches of grass along the water’s edge. The treasure may be closer than you think, but the forest likes to keep its secrets.",
       "backgroundImage": "creekStage.jpg",
-      "hintButtonTimeoutSeconds": 10,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
-        "radius": 3,
-        "latitude": 49.30255524037856, 
-        "longitude": -122.81197677931083
+        "radius": 6,
+        "latitude": 49.302439,   
+        "longitude": -122.811853
       },
       "hintLocation": {
         "radius": 15,
@@ -65,7 +65,7 @@
       "name": "The Hilltop Trail",
       "description": "For the final stage of your adventure, follow the hiking trail that climbs steadily up the hillside. The path winds through tall evergreen trees and rocky ground, leading you higher and higher above the forest. As you reach the upper part of the trail, the view opens up and the city can be seen stretching out far below. Power lines cross the landscape in the distance, and the wind feels stronger here at the top. Somewhere near this scenic lookout, the final treasure has been hidden. It could be near a rock, beside the trail, or tucked quietly among the grass and roots of the trees. Take a moment to enjoy the view before you begin searching. The last Easter egg of your quest is waiting for you here — can you find it?",
       "backgroundImage": "hillStage.jpg",
-      "hintButtonTimeoutSeconds": 10,
+      "hintButtonTimeoutSeconds": 400,
       "targetLocation": {
         "radius": 3,
         "latitude": 49.3034157587787, 
@@ -90,7 +90,7 @@
       "backgroundImage": "rottenstump.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
-        "radius": 3,
+        "radius": 5,
         "latitude": 49.304125301590986, 
         "longitude": -122.81276614348776
       },
@@ -113,9 +113,9 @@
       "backgroundImage": "bigbridge.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
-        "radius": 3,
-        "latitude": 49.30501367589216,
-        "longitude": -122.81061747972967
+        "radius": 5,
+        "latitude": 49.305038,
+        "longitude": -122.8108
       },
       "hintLocation": {
         "radius": 15,
@@ -136,9 +136,9 @@
       "backgroundImage": "workyard.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
-        "radius": 3,
-        "latitude": 49.30534900713147, 
-        "longitude": -122.80587637852669
+        "radius": 4,
+        "latitude": 49.3053353182459, 
+        "longitude": -122.80590126130134
       },
       "hintLocation": {
         "radius": 15,
@@ -159,19 +159,19 @@
       "backgroundImage": "darkforest.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
-        "radius": 3,
-        "latitude": 49.304827553872826, 
-        "longitude": -122.8037566186652
+        "radius": 5,
+        "latitude": 49.304643,
+        "longitude": -122.803741
       },
       "hintLocation": {
         "radius": 15,
-        "latitude": 49.304805560702334, 
-        "longitude": -122.80379734813205
+        "latitude": 49.30464298269827, 
+        "longitude": -122.80374127108209
       },
       "searchLocation": {
         "radius": 50,
-        "latitude": 49.30467924201518, 
-        "longitude": -122.80376668767471
+        "latitude": 49.30464298269827, 
+        "longitude": -122.80374127108209
       },
       "score": 12,
 	  "answer": "inside tree hollow"
