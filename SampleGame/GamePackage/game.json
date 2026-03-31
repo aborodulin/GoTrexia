@@ -1,6 +1,7 @@
 {
   "settings": {
-    "backButton": "backbutton.png"
+    "backButton": "backbutton.png",
+    "completedSound": "Magic Chime.mp3"
   },
   "startScreen": {
     "title": "Easter Forest Hunt",
@@ -16,10 +17,10 @@
   },
   "stages": [
     {
-      "name": "Back to childhood",
-      "description": "Welcome to the first stage of the treasure hunt! Your adventure begins in the familiar surroundings of a Canadian schoolyard. Around you are wide open spaces: the grassy football field, tall evergreen trees swaying gently in the wind, and the school building standing quietly in the background. Somewhere in this area a small Easter treasure has been carefully hidden. It might be near the edge of the field, close to the trees, or perhaps beside a bench where students usually sit during recess. Take a slow walk around and pay attention to details. Look near bushes, tree roots, or places where colorful eggs could blend into the scenery. Remember, the treasure is hidden well but not impossible to find. Explore carefully and enjoy the start of your adventure!",
+      "name": "1. Baby Steps",
+      "description": "Find a place made for the little ones. Among the red and pink playground structures, head toward the fence and look for a dried-out tree. Somewhere nearby, hidden in the bushes, you’ll find what you’re looking for. Your treasure might be lightly covered with wood chips. Keep an eye out — there may also be an orange clue hanging close by.",
       "backgroundImage": "playyardstage.jpg",
-      "hintButtonTimeoutSeconds": 300,
+      "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
         "radius": 5,
         "latitude": 49.300780955654474, 
@@ -39,14 +40,14 @@
   	  "answer": "inside thick bushes"
     },
     {
-      "name": "The Whispering Ravine",
-      "description": "Your journey now leads you away from open spaces and into a quiet forest ravine. The ground slopes downward, and a small stream flows gently along the bottom, weaving its way between stones and fallen branches. The tall trees above create a soft canopy that filters the sunlight, giving the place a mysterious and slightly darker atmosphere. This is the perfect place for a hidden treasure. Somewhere along the ravine, close to the stream or tucked beside an old tree root, an Easter egg waits to be discovered. Listen to the sound of the water and take your time exploring the surroundings. Check near rocks, fallen logs, and patches of grass along the water’s edge. The treasure may be closer than you think, but the forest likes to keep its secrets.",
+      "name": "2. Bubbling Creek",
+      "description": "Make your way down to the creek — you’ll hear it before you see it. Nearby, there’s a large tree surrounded by big boulders. Step onto one of the rocks close to the tree and look carefully around — your treasure is hidden somewhere nearby. You might need to use a bit of strength to get to it, but be careful not to fall into the water! If the beavers haven’t taken it, you may also spot a clue.",
       "backgroundImage": "creekStage.jpg",
-      "hintButtonTimeoutSeconds": 300,
+      "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
-        "radius": 6,
-        "latitude": 49.302439,   
-        "longitude": -122.811853
+        "radius": 6, 
+        "latitude": 49.30250577920034,   
+        "longitude": -122.81201944877218
       },
       "hintLocation": {
         "radius": 15,
@@ -59,13 +60,36 @@
         "longitude": -122.81196430067399
       },
       "score": 8,
-	  "answer": "behind tree roots"
+	  "answer": "under flat rock"
     },
     {
-      "name": "The Hilltop Trail",
-      "description": "For the final stage of your adventure, follow the hiking trail that climbs steadily up the hillside. The path winds through tall evergreen trees and rocky ground, leading you higher and higher above the forest. As you reach the upper part of the trail, the view opens up and the city can be seen stretching out far below. Power lines cross the landscape in the distance, and the wind feels stronger here at the top. Somewhere near this scenic lookout, the final treasure has been hidden. It could be near a rock, beside the trail, or tucked quietly among the grass and roots of the trees. Take a moment to enjoy the view before you begin searching. The last Easter egg of your quest is waiting for you here — can you find it?",
+      "name": "3. School Backyard",
+      "description": "Head toward the school! Walk past the stadium and you’ll see a set of stairs leading down — don’t take them, but stay nearby. The treasure is hidden somewhere around this area. If you go down the slope toward the fence, you’ll find a large pine tree (there are quite a few, so look carefully). The right one stands next to a dried-out tree and a storm drain — that’s your spot. This is where you should start searching for the clue. The treasure might not be buried, so keep your eyes open! And yes, feel free to run around between the trees — it’s part of the fun! 🌲",
+      "backgroundImage": "schoolyard.jpg",
+      "hintButtonTimeoutSeconds": 30,
+      "targetLocation": {
+        "radius": 6, 
+        "latitude": 49.298542105205975,
+        "longitude":  -122.81315559080069
+      },
+      "hintLocation": {
+        "radius": 15,
+        "latitude": 49.298615451680526, 
+        "longitude": -122.81305285518602
+      },
+      "searchLocation": {
+        "radius": 50,
+        "latitude": 49.2986596167721,
+        "longitude": -122.81322988097217
+      },
+      "score": 8,
+	  "answer": "hanging on a branch"
+    },
+    {
+      "name": "4. King of the Hill",
+      "description": "Head up to the top of the trail. Getting there is the hardest part — the rest should be easy. No, you don’t need to search inside the trash can, but our surprise is hidden somewhere nearby. I’m sure you’ll quickly figure out where to look, but just in case, there’s an orange hint close by. Not afraid to get your hands dirty?! 🥕",
       "backgroundImage": "hillStage.jpg",
-      "hintButtonTimeoutSeconds": 400,
+      "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
         "radius": 3,
         "latitude": 49.3034157587787, 
@@ -85,8 +109,8 @@
 	  "answer": "under pine branches"
     },
     {
-      "name": "Rotten stump",
-      "description": "Search near the big oak tree by the stream.",
+      "name": "5. Path Blocked",
+      "description": "Be careful not to wander into someone’s backyard while searching for this one. Look among the rotting stumps — there’s likely a small hollow or a crack hiding the treasure. If it gets too tricky, an orange clue might still be there to guide you the right way.",
       "backgroundImage": "rottenstump.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
@@ -105,17 +129,17 @@
         "longitude": -122.81289968550199
       },
       "score": 12,
-	  "answer": "inside tree hollow"
+	  "answer": "inside old stump"
     },
     {
-      "name": "Bridge",
-      "description": "Search near the big oak tree by the stream.",
+      "name": "6. Big Bridge",
+      "description": "The next treasure isn’t far. You’ll pass a few bridges, but you’re looking for the biggest one. Once you cross to the other side, start searching right underneath the bridge. You probably won’t even need a hint this time. Still, be careful — there’s always a chance of slipping into the water, and you’ve got two more treasures ahead!",
       "backgroundImage": "bigbridge.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
-        "radius": 5,
-        "latitude": 49.305038,
-        "longitude": -122.8108
+        "radius": 5, 
+        "latitude": 49.30503265521488,
+        "longitude": -122.81069658027158
       },
       "hintLocation": {
         "radius": 15,
@@ -128,11 +152,11 @@
         "longitude": -122.81086836429803
       },
       "score": 12,
-	  "answer": "inside tree hollow"
+	  "answer": "under wooden bridge"
     },
     {
-      "name": "Work yard",
-      "description": "Search near the big oak tree by the stream.",
+      "name": "7. Work yard",
+      "description": "This time you’ll need to walk a bit. Be careful when crossing the road. Once you find a construction site, take a good look around. Searching in the sand would take too long, and the small gravel isn’t much better without a shovel. Try looking among something bigger. An orange clue might come in very handy here.",
       "backgroundImage": "workyard.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
@@ -151,11 +175,11 @@
         "longitude": -122.80578593842826
       },
       "score": 12,
-	  "answer": "inside tree hollow"
+	  "answer": "behind big rock"
     },
     {
-      "name": "Dark forest",
-      "description": "Search near the big oak tree by the stream.",
+      "name": "8. Dark forest",
+      "description": "Gather your strength — the final treasure is hidden in the forest. From the main path, look for a faint trail leading uphill. I’ll leave a clue in a noticeable spot, but it might be gone. After heading a little way up, turn left toward a cluster of fallen trees and rotting stumps. Don’t focus on the stumps — it’s the logs you should be paying attention to.",
       "backgroundImage": "darkforest.jpg",
       "hintButtonTimeoutSeconds": 30,
       "targetLocation": {
@@ -174,7 +198,7 @@
         "longitude": -122.80374127108209
       },
       "score": 12,
-	  "answer": "inside tree hollow"
+	  "answer": "under fallen log"
     }
   ],
   "answers": [
@@ -207,6 +231,7 @@
 	"under small bridge",
 	"near trail sign",
 	"inside thick bushes",
-	"under tree hollow"
+	"under tree hollow",
+        "hanging on a branch"
 	]
 }

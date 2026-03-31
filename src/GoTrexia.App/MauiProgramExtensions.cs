@@ -20,6 +20,7 @@ namespace GoTrexia
             builder.Services.AddSingleton<GameSession>();
             builder.Services.AddSingleton<DistanceCalculator>();
             builder.Services.AddSingleton<StageCompletionEngine>();
+            builder.Services.AddSingleton<CompletedSoundPlayer>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

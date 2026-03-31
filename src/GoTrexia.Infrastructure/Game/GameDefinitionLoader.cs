@@ -51,7 +51,8 @@ public sealed class GameDefinitionLoader
 
         return new GameDefinition(
             new GameSettings(
-                payload.Settings.BackButton),
+                payload.Settings.BackButton,
+                NormalizeOptionalValue(payload.Settings.CompletedSound)),
             new ScreenDefinition(
                 payload.StartScreen.Title,
                 payload.StartScreen.Description,
@@ -75,7 +76,8 @@ public sealed class GameDefinitionLoader
         IReadOnlyList<string> Answers);
 
     private sealed record GameSettingsPayload(
-        string? BackButton);
+        string? BackButton,
+        string? CompletedSound);
 
     private sealed record ScreenPayload(
         string Title,
@@ -154,5 +156,12 @@ public sealed class GameDefinitionLoader
 
         if (longitude < -180 || longitude > 180)
             throw new InvalidOperationException($"{stageName}.{locationName}.longitude must be between -180 and 180.");
+    }
+
+    private static string? NormalizeOptionalValue(string? value)
+    {
+        return string.IsNullOrWhiteSpace(value)
+            ? null
+            : value;
     }
 }

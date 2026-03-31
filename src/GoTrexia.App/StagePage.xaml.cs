@@ -6,6 +6,7 @@ namespace GoTrexia;
 public partial class StagePage : ContentPage
 {
     private readonly GameSession _gameSession;
+    private readonly CompletedSoundPlayer _completedSoundPlayer;
     private IDispatcherTimer? _locationTimer;
 
     public StagePage()
@@ -16,6 +17,7 @@ public partial class StagePage : ContentPage
             ?? throw new InvalidOperationException("Service provider is not available.");
 
         _gameSession = services.GetRequiredService<GameSession>();
+        _completedSoundPlayer = services.GetRequiredService<CompletedSoundPlayer>();
     }
 
     protected override void OnAppearing()
@@ -52,6 +54,17 @@ public partial class StagePage : ContentPage
     {
         var engine = _gameSession.Engine!;
         if (engine.IsCurrentStageCompleted)
+        {
+            return;
+        }
+
+        var confirmSkip = await DisplayAlert(
+            "Skip",
+            "Are you sure you want to skip this stage?",
+            "Yes",
+            "No");
+
+        if (!confirmSkip)
         {
             return;
         }
@@ -145,6 +158,11 @@ public partial class StagePage : ContentPage
             engine.UpdatePlayerPosition(new GoTrexia.Core.ValueObjects.GeoPoint(
                 lastKnownLocation.Latitude,
                 lastKnownLocation.Longitude));
+
+            if (_gameSession.TryMarkCompletionSoundPlayed())
+            {
+                _completedSoundPlayer.Play(_gameSession.RootFolder, engine.Settings.CompletedSound);
+            }
         }
 
         UpdateActionButtons();

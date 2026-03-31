@@ -7,6 +7,7 @@ namespace GoTrexia;
 public partial class AnswerPage : ContentPage
 {
     private readonly GameSession _gameSession;
+    private readonly CompletedSoundPlayer _completedSoundPlayer;
     private int _availableScore;
     private int _wrongAnswersCount;
     private string _correctAnswer = string.Empty;
@@ -19,6 +20,7 @@ public partial class AnswerPage : ContentPage
             ?? throw new InvalidOperationException("Service provider is not available.");
 
         _gameSession = services.GetRequiredService<GameSession>();
+        _completedSoundPlayer = services.GetRequiredService<CompletedSoundPlayer>();
     }
 
     protected override void OnAppearing()
@@ -88,6 +90,8 @@ public partial class AnswerPage : ContentPage
             DisableAllAnswerButtons();
             button.BackgroundColor = Colors.Green;
             button.TextColor = Colors.White;
+
+            _completedSoundPlayer.Play(_gameSession.RootFolder, engine.Settings.CompletedSound);
 
             await Task.Delay(TimeSpan.FromSeconds(2));
 

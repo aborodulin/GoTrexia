@@ -6,6 +6,7 @@ namespace GoTrexia;
 public partial class EndPage : ContentPage
 {
     private readonly GameSession _gameSession;
+    private readonly CompletedSoundPlayer _completedSoundPlayer;
 
     public EndPage()
     {
@@ -15,6 +16,7 @@ public partial class EndPage : ContentPage
             ?? throw new InvalidOperationException("Service provider is not available.");
 
         _gameSession = services.GetRequiredService<GameSession>();
+        _completedSoundPlayer = services.GetRequiredService<CompletedSoundPlayer>();
     }
 
     protected override void OnAppearing()
@@ -28,6 +30,7 @@ public partial class EndPage : ContentPage
         ScoreLabel.Text = $"Score: {engine.TotalScore}";
         BackgroundImage.Source = BuildImagePath(_gameSession.RootFolder, engine.EndScreen.BackgroundImage);
         BackButtonImage.Source = BuildImagePath(_gameSession.RootFolder, engine.Settings.BackButton);
+        _completedSoundPlayer.Play(_gameSession.RootFolder, engine.Settings.CompletedSound);
     }
 
     private async void OnBackToStartClicked(object? sender, EventArgs e)

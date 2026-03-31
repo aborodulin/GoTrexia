@@ -7,6 +7,7 @@ namespace GoTrexia;
 public partial class MapPage : ContentPage
 {
     private readonly GameSession _gameSession;
+    private readonly CompletedSoundPlayer _completedSoundPlayer;
     private IDispatcherTimer? _timer;
     private bool _hasLocationPermission;
     private bool _permissionInitialized;
@@ -30,6 +31,7 @@ public partial class MapPage : ContentPage
             ?? throw new InvalidOperationException("Service provider is not available.");
 
         _gameSession = services.GetRequiredService<GameSession>();
+        _completedSoundPlayer = services.GetRequiredService<CompletedSoundPlayer>();
     }
 
     protected override void OnAppearing()
@@ -70,6 +72,17 @@ public partial class MapPage : ContentPage
         {
             if (!_isSkipTargetRevealed)
             {
+                var confirmSkip = await DisplayAlert(
+                    "Skip",
+                    "Are you sure you want to skip this stage?",
+                    "Yes",
+                    "No");
+
+                if (!confirmSkip)
+                {
+                    return;
+                }
+
                 _isSkipTargetRevealed = true;
                 LoadCurrentStageMap();
                 UpdateCountdown();
@@ -86,6 +99,17 @@ public partial class MapPage : ContentPage
 
             _gameSession.StartCurrentStageTimer();
             await Shell.Current.GoToAsync("///StartPage/StagePage");
+            return;
+        }
+
+        var confirmHintUsage = await DisplayAlert(
+            "Hint",
+            "Using a hint will give you only half the points. Are you sure?",
+            "Yes",
+            "No");
+
+        if (!confirmHintUsage)
+        {
             return;
         }
 
@@ -258,6 +282,11 @@ public partial class MapPage : ContentPage
                 _gameSession.Engine!.UpdatePlayerPosition(new GoTrexia.Core.ValueObjects.GeoPoint(
                     lastKnownLocation.Latitude,
                     lastKnownLocation.Longitude));
+
+                if (_gameSession.TryMarkCompletionSoundPlayed())
+                {
+                    _completedSoundPlayer.Play(_gameSession.RootFolder, _gameSession.Engine.Settings.CompletedSound);
+                }
             }
         }
     }

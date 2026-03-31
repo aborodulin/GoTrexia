@@ -4,6 +4,7 @@ using GoTrexia.Core.Engine;
 public sealed class GameSession
 {
     private readonly Dictionary<int, DateTimeOffset> _stageStartedAt = [];
+    private readonly Dictionary<int, bool> _stageCompletionSoundState = [];
 
     public GameEngine? Engine { get; private set; }
     public string? RootFolder { get; private set; }
@@ -17,6 +18,7 @@ public sealed class GameSession
         Engine = new GameEngine(definition, stageEngine);
         RootFolder = rootFolder;
         _stageStartedAt.Clear();
+        _stageCompletionSoundState.Clear();
     }
 
     public void StartCurrentStageTimer()
@@ -50,5 +52,21 @@ public sealed class GameSession
 
         var elapsed = (int)(DateTimeOffset.UtcNow - startedAt).TotalSeconds;
         return Math.Max(0, timeout - elapsed);
+    }
+
+    public bool TryMarkCompletionSoundPlayed()
+    {
+        if (Engine is null || Engine.IsFinished)
+        {
+            return false;
+        }
+
+        var stageIndex = Engine.CurrentStageIndex;
+        var canComplete = Engine.CanCompleteCurrentStage;
+        _stageCompletionSoundState.TryGetValue(stageIndex, out var wasInTargetArea);
+
+        _stageCompletionSoundState[stageIndex] = canComplete;
+
+        return canComplete && !wasInTargetArea;
     }
 }
