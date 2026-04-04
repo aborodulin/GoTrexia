@@ -20,7 +20,7 @@
       "name": "1. Baby Steps",
       "description": "Find a place made for the little ones. Among the red and pink playground structures, head toward the fence and look for a dried-out tree. Somewhere nearby, hidden in the bushes, you’ll find what you’re looking for. Your treasure might be lightly covered with wood chips. Keep an eye out — there may also be an orange clue hanging close by.",
       "backgroundImage": "playyardstage.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 5,
         "latitude": 49.300780955654474, 
@@ -43,7 +43,7 @@
       "name": "2. Bubbling Creek",
       "description": "Make your way down to the creek — you’ll hear it before you see it. Nearby, there’s a large tree surrounded by big boulders. Step onto one of the rocks close to the tree and look carefully around — your treasure is hidden somewhere nearby. You might need to use a bit of strength to get to it, but be careful not to fall into the water! If the beavers haven’t taken it, you may also spot a clue.",
       "backgroundImage": "creekStage.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 6, 
         "latitude": 49.30250577920034,   
@@ -66,7 +66,7 @@
       "name": "3. School Backyard",
       "description": "Head toward the school! Walk past the stadium and you’ll see a set of stairs leading down — don’t take them, but stay nearby. The treasure is hidden somewhere around this area. If you go down the slope toward the fence, you’ll find a large pine tree (there are quite a few, so look carefully). The right one stands next to a dried-out tree and a storm drain — that’s your spot. This is where you should start searching for the clue. The treasure might not be buried, so keep your eyes open! And yes, feel free to run around between the trees — it’s part of the fun! 🌲",
       "backgroundImage": "schoolyard.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 6, 
         "latitude": 49.298542105205975,
@@ -89,7 +89,7 @@
       "name": "4. King of the Hill",
       "description": "Head up to the top of the trail. Getting there is the hardest part — the rest should be easy. No, you don’t need to search inside the trash can, but our surprise is hidden somewhere nearby. I’m sure you’ll quickly figure out where to look, but just in case, there’s an orange hint close by. Not afraid to get your hands dirty?! 🥕",
       "backgroundImage": "hillStage.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 3,
         "latitude": 49.3034157587787, 
@@ -112,7 +112,7 @@
       "name": "5. Path Blocked",
       "description": "Be careful not to wander into someone’s backyard while searching for this one. Look among the rotting stumps — there’s likely a small hollow or a crack hiding the treasure. If it gets too tricky, an orange clue might still be there to guide you the right way.",
       "backgroundImage": "rottenstump.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 5,
         "latitude": 49.304125301590986, 
@@ -135,7 +135,7 @@
       "name": "6. Big Bridge",
       "description": "The next treasure isn’t far. You’ll pass a few bridges, but you’re looking for the biggest one. Once you cross to the other side, start searching right underneath the bridge. You probably won’t even need a hint this time. Still, be careful — there’s always a chance of slipping into the water, and you’ve got two more treasures ahead!",
       "backgroundImage": "bigbridge.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 5, 
         "latitude": 49.30503265521488,
@@ -158,7 +158,7 @@
       "name": "7. Work yard",
       "description": "This time you’ll need to walk a bit. Be careful when crossing the road. Once you find a construction site, take a good look around. Searching in the sand would take too long, and the small gravel isn’t much better without a shovel. Try looking among something bigger. An orange clue might come in very handy here.",
       "backgroundImage": "workyard.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 4,
         "latitude": 49.3053353182459, 
@@ -181,7 +181,7 @@
       "name": "8. Dark forest",
       "description": "Gather your strength — the final treasure is hidden in the forest. From the main path, look for a faint trail leading uphill. I’ll leave a clue in a noticeable spot, but it might be gone. After heading a little way up, turn left toward a cluster of fallen trees and rotting stumps. Don’t focus on the stumps — it’s the logs you should be paying attention to.",
       "backgroundImage": "darkforest.jpg",
-      "hintButtonTimeoutSeconds": 30,
+      "hintButtonTimeoutSeconds": 300,
       "targetLocation": {
         "radius": 5,
         "latitude": 49.304643,
@@ -199,6 +199,29 @@
       },
       "score": 12,
 	  "answer": "under fallen log"
+    },
+    {
+      "name": "9. Final delivery",
+      "description": "Let’s head back to where it all began and find your final package. To discover which mailbox it’s in, you’ll need to solve a little math puzzle. Take your total score, multiply it by 2, add 10, divide the result by 2, then subtract your score — and subtract 3 more. The number you get is the mailbox with your final surprise. Good luck… and congratulations! 🎉",
+      "backgroundImage": "post.jpg",
+      "hintButtonTimeoutSeconds": 300,
+      "targetLocation": {
+        "radius": 5,
+        "latitude": 49.300496753144266, 
+        "longitude": -122.81014258017312
+      },
+      "hintLocation": {
+        "radius": 15,
+        "latitude": 49.300496753144266, 
+        "longitude": -122.81014258017312
+      },
+      "searchLocation": {
+        "radius": 50,
+        "latitude": 49.300496753144266, 
+        "longitude": -122.81014258017312
+      },
+      "score": 12,
+	  "answer": "inside mail box"
     }
   ],
   "answers": [
@@ -232,6 +255,7 @@
 	"near trail sign",
 	"inside thick bushes",
 	"under tree hollow",
-        "hanging on a branch"
+        "hanging on a branch",
+        "inside mail box"
 	]
 }
